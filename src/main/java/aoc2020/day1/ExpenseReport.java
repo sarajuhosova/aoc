@@ -1,9 +1,8 @@
 package aoc2020.day1;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+import library.DataType;
 import library.Year;
 import library.io.Input;
 
@@ -63,10 +62,7 @@ public class ExpenseReport {
 		System.out.println("Hello, Advent of Code 2020!");
 
 		// load data
-		Scanner sc = Input.readData(Year.AOC_2020, "day1.txt");
-		nums = Stream
-				.iterate(sc.nextInt(), sc::hasNextInt, sc::nextInt)
-				.collect(Collectors.toSet());
+		nums = Input.collectDataToSet(Input.readData(Year.AOC_2020, "day1.txt"), DataType.INT);
 
 		// Part 1
 		System.out.println(getTwoMultipliers());
