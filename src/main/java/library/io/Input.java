@@ -17,9 +17,9 @@ public class Input {
 	/**
 	 * Creates a scanner for the input file of that day.
 	 *
-	 * @param year the year of the Advent of Code
-	 * @param fileName the name of the file
-	 * @return the scanner which will read the data
+	 * @param  year     the year of the Advent of Code
+	 * @param  fileName the name of the file
+	 * @return          the scanner which will read the data
 	 */
 	public static Scanner openFile(Year year, String fileName) {
 		try {
@@ -34,9 +34,9 @@ public class Input {
 	/**
 	 * Reads the data from the relevant file to a stream of string.
 	 *
-	 * @param year the year of the Advent of Code
-	 * @param fileName the name of the file
-	 * @return the stream of strings containing the data
+	 * @param  year     the year of the Advent of Code
+	 * @param  fileName the name of the file
+	 * @return          the stream of strings containing the data
 	 */
 	public static Stream<String> readData(Year year, String fileName) {
 		try {
@@ -51,10 +51,10 @@ public class Input {
 	/**
 	 * Reads the data from the relevant file to a stream of string.
 	 *
-	 * @param year the year of the Advent of Code
-	 * @param fileName the name of the file
-	 * @param delimiter the delimiter on which to split the individual lines
-	 * @return the stream of strings containing the data
+	 * @param  year      the year of the Advent of Code
+	 * @param  fileName  the name of the file
+	 * @param  delimiter the delimiter on which to split the individual lines
+	 * @return           the stream of strings containing the data
 	 */
 	public static Stream<String> readData(Year year, String fileName, String delimiter) {
 		try {
@@ -70,10 +70,10 @@ public class Input {
 	/**
 	 * Maps a stream of strings to a list of the desired data type.
 	 *
-	 * @param data the stream containing the data
-	 * @param type the desired data type
-	 * @param <T> the desired data type
-	 * @return a list containing the data in the desired data type
+	 * @param  data the stream containing the data
+	 * @param  type the desired data type
+	 * @param  <T>  the desired data type
+	 * @return      a list containing the data in the desired data type
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> List<T> collectDataToList(Stream<String> data, DataType type) {
@@ -83,10 +83,10 @@ public class Input {
 	/**
 	 * Maps a stream of strings to a set of the desired data type.
 	 *
-	 * @param data the stream containing the data
-	 * @param type the desired data type
-	 * @param <T> the desired data type
-	 * @return a set containing the data in the desired data type
+	 * @param  data the stream containing the data
+	 * @param  type the desired data type
+	 * @param  <T>  the desired data type
+	 * @return      a set containing the data in the desired data type
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> Set<T> collectDataToSet(Stream<String> data, DataType type) {
