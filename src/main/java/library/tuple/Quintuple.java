@@ -1,15 +1,19 @@
 package library.tuple;
 
-public class Triple<A, B, C> extends Tuple {
+public class Quintuple<A, B, C, D, E> extends Tuple {
 
 	private A a;
 	private B b;
 	private C c;
+	private D d;
+	private E e;
 
-	public Triple(A a, B b, C c) {
+	public Quintuple(A a, B b, C c, D d, E e) {
 		this.a = a;
 		this.b = b;
 		this.c = c;
+		this.d = d;
+		this.e = e;
 	}
 
 	public A getFirst() {
@@ -24,6 +28,14 @@ public class Triple<A, B, C> extends Tuple {
 		return c;
 	}
 
+	public D getFourth() {
+		return d;
+	}
+
+	public E getFifth() {
+		return e;
+	}
+
 	public void setFirst(A a) {
 		this.a = a;
 	}
@@ -34,5 +46,13 @@ public class Triple<A, B, C> extends Tuple {
 
 	public void setThird(C c) {
 		this.c = c;
+	}
+
+	public void setFourth(D d) {
+		this.d = d;
+	}
+
+	public void setFifth(E e) {
+		this.e = e;
 	}
 }

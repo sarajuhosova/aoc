@@ -1,6 +1,6 @@
 package library.tuple;
 
-public class Quadruple<A, B, C, D> {
+public class Quadruple<A, B, C, D> extends Tuple {
 
 	private A a;
 	private B b;

@@ -1,18 +1,17 @@
 package aoc2020.oneliner;
 
+import library.tuple.Tuple;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import library.tuple.Quadruple;
-import library.tuple.Triple;
 
 public class Day2 {
 
 	public static long part1() throws IOException {
 		return Files.lines(Path.of("src/main/resources/aoc2020/day2.txt"))
 				.map(l -> l.split(" |-"))
-				.map(a -> new Triple<Integer, Integer, Long>(
+				.map(a -> Tuple.of(
 						Integer.parseInt(a[0]),
 						Integer.parseInt(a[1]),
 						a[3].chars().filter(c -> c == (int) a[2].charAt(0)).count()))
@@ -23,7 +22,7 @@ public class Day2 {
 	public static long part2() throws IOException {
 		return Files.lines(Path.of("src/main/resources/aoc2020/day2.txt"))
 				.map(l -> l.split(" |-"))
-				.map(a -> new Quadruple<Integer, Integer, Character, String>(
+				.map(a -> Tuple.of(
 						Integer.parseInt(a[0]),
 						Integer.parseInt(a[1]),
 						a[2].charAt(0),

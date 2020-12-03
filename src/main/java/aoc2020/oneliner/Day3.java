@@ -1,6 +1,7 @@
 package aoc2020.oneliner;
 
 import library.tuple.Pair;
+import library.tuple.Tuple;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,7 +16,7 @@ public class Day3 {
     public static long part1() throws IOException {
         return ((Function<List<String>, Long>) list ->
             Stream.iterate(0, x -> x + 1).limit(list.size())
-                    .map(i -> new Pair<>(i, list.get(i)))
+                    .map(i -> Tuple.of(i, list.get(i)))
                     .filter(p -> p.getSecond().charAt((p.getFirst() * 3) % p.getSecond().length()) == '#')
                     .count()
         ).apply(Files.lines(Path.of("src/main/resources/aoc2020/day3.txt")).collect(Collectors.toList()));
@@ -24,11 +25,11 @@ public class Day3 {
     public static long part2() throws IOException {
         return ((Function<List<Pair<Integer, String>>, Long>) rows ->
                 List.of(
-                        new Pair<>(1, 1),
-                        new Pair<>(3, 1),
-                        new Pair<>(5, 1),
-                        new Pair<>(7, 1),
-                        new Pair<>(1, 2)
+                        Tuple.of(1, 1),
+                        Tuple.of(3, 1),
+                        Tuple.of(5, 1),
+                        Tuple.of(7, 1),
+                        Tuple.of(1, 2)
                 ).stream()
                         .map(path -> rows.stream()
                                 .filter(row -> (row.getFirst() % path.getSecond()) == 0
@@ -38,7 +39,7 @@ public class Day3 {
         ).apply(
                 ((Function<List<String>, List<Pair<Integer, String>>>) data ->
                         Stream.iterate(0, x -> x + 1).limit(data.size())
-                                .map(i -> new Pair<>(i, data.get(i)))
+                                .map(i -> Tuple.of(i, data.get(i)))
                                 .collect(Collectors.toList()))
                         .apply(Files.lines(Path.of("src/main/resources/aoc2020/day3.txt"))
                                 .collect(Collectors.toList()))

@@ -1,6 +1,6 @@
 package library.tuple;
 
-public class Pair<A, B> {
+public class Pair<A, B> extends Tuple {
 
 	private A a;
 	private B b;
