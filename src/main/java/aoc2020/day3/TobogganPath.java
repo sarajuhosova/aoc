@@ -72,8 +72,7 @@ public class TobogganPath {
 				new Pair<>(3, 1),
 				new Pair<>(5, 1),
 				new Pair<>(7, 1),
-				new Pair<>(1, 2)
-		).stream()
+				new Pair<>(1, 2)).stream()
 				.map(p -> countTrees(patterns, p.getFirst(), p.getSecond()))
 				.reduce(1L, (a, b) -> a * b);
 	}

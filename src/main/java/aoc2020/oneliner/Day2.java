@@ -1,10 +1,10 @@
 package aoc2020.oneliner;
 
-import library.tuple.Tuple;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import library.tuple.Tuple;
 
 public class Day2 {
 
