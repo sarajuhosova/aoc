@@ -1,4 +1,4 @@
-package library.passport;
+package library.enums;
 
 import java.util.Set;
 import java.util.function.Function;

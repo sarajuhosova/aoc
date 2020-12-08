@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import library.Year;
 import library.io.Input;
-import library.passport.Attribute;
+import library.enums.Attribute;
 
 /**
  * You arrive at the airport only to realize that you grabbed your North Pole Credentials instead of your
