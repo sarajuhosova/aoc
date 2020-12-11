@@ -1,28 +1,32 @@
 package library.enums;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public enum Instruction {
-    JMP("jmp"),
-    ACC("acc"),
-    NOP("nop");
+	JMP(
+		"jmp"
+	),
+	ACC(
+		"acc"
+	),
+	NOP(
+		"nop"
+	);
 
-    String string;
+	String string;
 
-    Instruction(String string) {
-        this.string = string;
-    }
+	Instruction(String string) {
+		this.string = string;
+	}
 
-    public String getString() {
-        return string;
-    }
+	public String getString() {
+		return string;
+	}
 
-    public static Map<String, Instruction> map() {
-        return Arrays.stream(Instruction.values())
-                .collect(Collectors.toMap(Instruction::getString, k -> k));
-    }
+	public static Map<String, Instruction> map() {
+		return Arrays.stream(Instruction.values())
+				.collect(Collectors.toMap(Instruction::getString, k -> k));
+	}
 }
