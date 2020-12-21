@@ -15,9 +15,10 @@ repositories {
 }
 
 dependencies {
+    implementation("com.google.guava", "guava", "11.0.2")
+
 	testImplementation("org.junit.jupiter", "junit-jupiter", "5.6.2")
     runtimeOnly("org.junit.jupiter", "junit-jupiter-engine", "5.3.1")
-    
 }
 
 // Configure Spotless plugin for style checking Java code.
