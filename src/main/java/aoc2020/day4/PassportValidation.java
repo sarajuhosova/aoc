@@ -4,7 +4,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import library.Year;
-import library.enums.Attribute;
 import library.io.Input;
 
 /**

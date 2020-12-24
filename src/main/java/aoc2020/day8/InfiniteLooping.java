@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import library.Year;
-import library.enums.Instruction;
 import library.io.Input;
 
 public class InfiniteLooping {

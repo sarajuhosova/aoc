@@ -1,4 +1,4 @@
-package library.enums;
+package aoc2020.day8;
 
 import java.util.Arrays;
 import java.util.Map;

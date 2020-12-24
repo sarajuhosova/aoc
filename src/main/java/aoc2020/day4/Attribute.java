@@ -1,4 +1,4 @@
-package library.enums;
+package aoc2020.day4;
 
 import java.util.Set;
 import java.util.function.Function;
