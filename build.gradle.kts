@@ -7,7 +7,7 @@ plugins {
     id("com.diffplug.gradle.spotless").version("3.27.2")
 }
 
-group = "org.example"
+group = "sjuhosova.aoc"
 version = "1.0-SNAPSHOT"
 
 repositories {
