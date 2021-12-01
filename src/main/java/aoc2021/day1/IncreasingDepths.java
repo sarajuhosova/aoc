@@ -7,7 +7,7 @@ import library.io.Input;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Day1 {
+public class IncreasingDepths {
 
     private static int countIncreases(List<Integer> data) {
         int total = 0;
@@ -17,7 +17,7 @@ public class Day1 {
         return total;
     }
 
-    private static int makeTuple(List<Integer> data) {
+    private static int countIncreasesWithWindow(List<Integer> data) {
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < data.size() - 2; i++) {
             result.add(data.get(i) + data.get(i + 1) + data.get(i + 2));
@@ -37,7 +37,7 @@ public class Day1 {
         System.out.println(countIncreases(data));
 
         // Part 2
-        System.out.println(makeTuple(data));
+        System.out.println(countIncreasesWithWindow(data));
     }
 
 }
