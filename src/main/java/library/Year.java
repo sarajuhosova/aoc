@@ -6,7 +6,10 @@ public enum Year {
 	),
 	AOC_2020(
 		"2020"
-	);
+	),
+    AOC_2021(
+            "2021"
+    );
 
 	String yearString;
 
