@@ -36,10 +36,10 @@ public class Board {
     private boolean hasVertical() {
         for (int j = 0; j < numbers[0].length; j++) {
             int count = 0;
-            for (int i = 0; i < numbers[j].length; i++) {
+            for (int i = 0; i < numbers.length; i++) {
                 if (marked[i][j]) count++;
             }
-            if (count == numbers[j].length)
+            if (count == numbers.length)
                 return true;
         }
         return false;
@@ -59,10 +59,10 @@ public class Board {
         return sum;
     }
 
-    public static Board read(Scanner sc) {
-        int[][] board = new int[5][5];
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
+    public static Board read(Scanner sc, int size) {
+        int[][] board = new int[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 board[i][j] = sc.nextInt();
             }
         }

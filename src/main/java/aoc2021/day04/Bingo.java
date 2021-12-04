@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class Bingo {
 
     private static Pair<List<Board>, List<Integer>> read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day4.txt");
+        Scanner sc = Input.openFile(Year.AOC_2021, "day04.txt");
 
         List<Integer> draws = Arrays.stream(sc.nextLine().split(","))
                 .map(Integer::parseInt)
@@ -22,7 +22,7 @@ public class Bingo {
         List<Board> boards = new ArrayList<>();
         while (sc.hasNext()) {
             sc.nextLine();
-            boards.add(Board.read(sc));
+            boards.add(Board.read(sc, 5));
         }
 
         return new Pair<>(boards, draws);
