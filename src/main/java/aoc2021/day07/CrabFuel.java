@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
-public class Day07 {
+public class CrabFuel {
 
     private static List<Integer> read() {
         Scanner sc = Input.openFile(Year.AOC_2021, "day07.txt");
@@ -52,10 +52,10 @@ public class Day07 {
         List<Integer> data = read();
 
         // part 1
-        System.out.println(getLeastFuel(data, Day07::countConstantFuel));
+        System.out.println(getLeastFuel(data, CrabFuel::countConstantFuel));
 
         // part 2
-        System.out.println(getLeastFuel(data, Day07::countIncreasingFuel));
+        System.out.println(getLeastFuel(data, CrabFuel::countIncreasingFuel));
     }
 
 }
