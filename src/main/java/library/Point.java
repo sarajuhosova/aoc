@@ -1,6 +1,8 @@
-package aoc2021.day09;
+package library;
 
-class Point {
+import java.util.Scanner;
+
+public class Point {
 
     private final int x;
     private final int y;
@@ -10,12 +12,23 @@ class Point {
         this.y = y;
     }
 
+    public Point(String s) {
+        String[] data = s.split(",");
+        this.x = Integer.parseInt(data[0]);
+        this.y = Integer.parseInt(data[1]);
+    }
+
     public int getX() {
         return x;
     }
 
     public int getY() {
         return y;
+    }
+
+    public static Point read(Scanner sc) {
+        String[] data = sc.nextLine().split(",");
+        return new Point(Integer.parseInt(data[0]), Integer.parseInt(data[1]));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package aoc2021.day09;
 
+import library.Point;
 import library.Year;
 import library.io.Input;
 
