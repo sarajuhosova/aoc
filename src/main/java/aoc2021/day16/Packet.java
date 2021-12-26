@@ -24,4 +24,17 @@ public abstract class Packet {
         else return OperationPacket.read(string);
     }
 
+    public void prettyPrint() {
+        prettyPrint(0);
+    }
+
+    protected void prettyPrint(int depth) {
+        if (depth > 0) {
+            for (int i = 0; i < depth - 1; i++) {
+                System.out.print("   ");
+            }
+            System.out.print("|- ");
+        }
+    }
+
 }

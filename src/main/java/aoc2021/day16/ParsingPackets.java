@@ -4,7 +4,7 @@ import library.Year;
 import library.io.Input;
 import library.tuple.Pair;
 
-public class Day16 {
+public class ParsingPackets {
 
     private static Packet read() {
         Pair<Packet, String> pair =
@@ -16,6 +16,8 @@ public class Day16 {
     public static void main(String[] args) {
         // load data
         Packet packet = read();
+
+        packet.prettyPrint();
 
         // Part 1
         System.out.println(packet.sumVersions());

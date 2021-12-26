@@ -74,4 +74,12 @@ public class OperationPacket extends Packet {
         return new Pair<>(new OperationPacket(version, operator, packets), packet);
     }
 
+    @Override
+    protected void prettyPrint(int depth) {
+        super.prettyPrint(depth);
+        System.out.println(operation);
+        for (Packet sub : packets)
+            sub.prettyPrint(depth + 1);
+    }
+
 }

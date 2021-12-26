@@ -37,4 +37,10 @@ public class LiteralPacket extends Packet {
         return new Pair<>(new LiteralPacket(version, Long.parseLong(packet, 2)), string);
     }
 
+    @Override
+    protected void prettyPrint(int depth) {
+        super.prettyPrint(depth);
+        System.out.println(value);
+    }
+
 }
