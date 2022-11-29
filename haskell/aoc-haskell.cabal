@@ -1,0 +1,81 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+
+name:           aoc-haskell
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/Github username here/aoc-haskell#readme>
+homepage:       https://github.com/Github username here/aoc-haskell#readme
+bug-reports:    https://github.com/Github username here/aoc-haskell/issues
+author:         Author name here
+maintainer:     Author email here
+copyright:      2019 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/Github username here/aoc-haskell
+
+library
+  exposed-modules:
+      AoC2015.Day01
+      AoC2017.Day01
+      AoC2018.Day01
+      AoC2019.Day01
+      AoC2020.Day01
+      AoC2021.Day01
+      AoC2021.Day02
+      AoC2021.Day03
+      AoC2021.Day04
+      AoC2021.Day05
+      AoC2021.Day06
+      AoC2021.Day07
+      Lib
+  other-modules:
+      Paths_aoc_haskell
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , containers >=0.6
+    , parsec >=3.1.14.0
+    , split >=0.2
+  default-language: Haskell2010
+
+executable aoc-haskell-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_aoc_haskell
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aoc-haskell
+    , base >=4.7 && <5
+    , containers >=0.6
+    , parsec >=3.1.14.0
+    , split >=0.2
+  default-language: Haskell2010
+
+test-suite aoc-haskell-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_aoc_haskell
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aoc-haskell
+    , base >=4.7 && <5
+    , containers >=0.6
+    , parsec >=3.1.14.0
+    , split >=0.2
+  default-language: Haskell2010
