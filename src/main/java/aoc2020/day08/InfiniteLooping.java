@@ -89,7 +89,7 @@ public class InfiniteLooping {
 	}
 
 	public static void main(String[] args) {
-		List<Command> data = Input.readData(Year.AOC_2020, "day08.txt")
+		List<Command> data = Input.readData(Year._2020, "day08.txt")
 				.map(s -> s.split(" "))
 				.map(a -> new Command(map.get(a[0]), Integer.parseInt(a[1])))
 				.collect(Collectors.toList());

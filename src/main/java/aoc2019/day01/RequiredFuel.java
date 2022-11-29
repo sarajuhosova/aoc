@@ -23,7 +23,7 @@ public class RequiredFuel {
 	}
 
 	public static void main(String[] args) {
-		long mass = Input.openFile(Year.AOC_2019, "day01.txt").nextInt();
+		long mass = Input.openFile(Year._2019, "day01.txt").nextInt();
 
 		// Part 1
 		System.out.println(getRequiredFuel(mass));

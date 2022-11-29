@@ -204,7 +204,7 @@ public class BasicMath {
     }
 
     public static void main(String[] args) {
-        List<String> expressions = Input.readData(Year.AOC_2020, "day18.txt")
+        List<String> expressions = Input.readData(Year._2020, "day18.txt")
                 .collect(Collectors.toList());
 
         System.out.println(noOperatorPrecedence(expressions));

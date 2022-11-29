@@ -83,7 +83,7 @@ public class CrabbyCups {
     }
 
     public static void main(String[] args) {
-        String data = Input.openFile(Year.AOC_2020, "day23.txt").nextLine();
+        String data = Input.openFile(Year._2020, "day23.txt").nextLine();
 
         Map<Integer, Integer> smallCircle = readSmallCircle(data);
         play(smallCircle, data.charAt(0) - '0',100);

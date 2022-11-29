@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class Bingo {
 
     private static Pair<List<Board>, List<Integer>> read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day04.txt");
+        Scanner sc = Input.openFile(Year._2021, "day04.txt");
 
         List<Integer> draws = Arrays.stream(sc.nextLine().split(","))
                 .map(Integer::parseInt)

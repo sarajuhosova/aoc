@@ -85,7 +85,7 @@ public class PasswordPolicy {
 
 	public static void main(String[] args) {
 		// read and parse data
-		List<Policy> policies = read(Input.openFile(Year.AOC_2020, "day02.txt").useDelimiter(" "));
+		List<Policy> policies = read(Input.openFile(Year._2020, "day02.txt").useDelimiter(" "));
 
 		// Part 1
 		System.out.println(amountPolicy(policies));

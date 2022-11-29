@@ -70,7 +70,7 @@ public class LobbyTiling {
     }
 
     public static void main(String[] args) {
-        List<String> data = Input.readData(Year.AOC_2020, "day24.txt").collect(Collectors.toList());
+        List<String> data = Input.readData(Year._2020, "day24.txt").collect(Collectors.toList());
         List<List<Direction>> tiles = read(data);
         List<Hexagon> honeycomb = Hexagon.buildHoneyComb(tiles.stream().mapToInt(List::size).max().getAsInt() * 10);
 

@@ -127,7 +127,7 @@ public class PocketDimension4D {
     }
 
     public static void main(String[] args) {
-        List<String> lines = Input.readData(Year.AOC_2020, "day17.txt").collect(Collectors.toList());
+        List<String> lines = Input.readData(Year._2020, "day17.txt").collect(Collectors.toList());
         Set<Cube> original = parse(lines);
         minX = 0;
         maxX = lines.size();

@@ -30,7 +30,7 @@ public class IncreasingDepths {
 
         // load data
         List<Integer> data = Input.collectDataToList(
-                Input.readData(Year.AOC_2021, "day01.txt"), DataType.INT
+                Input.readData(Year._2021, "day01.txt"), DataType.INT
         );
 
         // Part 1

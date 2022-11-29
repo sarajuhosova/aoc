@@ -164,7 +164,7 @@ public class MemoryMasking {
 
     public static void main(String[] args) {
         // Read
-        List<String> lines = Input.readData(Year.AOC_2020, "day14.txt")
+        List<String> lines = Input.readData(Year._2020, "day14.txt")
                 .collect(Collectors.toList());
         List<InstructionSet> instructions = read(lines);
 

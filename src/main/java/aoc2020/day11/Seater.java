@@ -175,7 +175,7 @@ public class Seater {
 	}
 
 	public static void main(String[] args) {
-		List<List<Character>> data = Input.readData(Year.AOC_2020, "day11.txt")
+		List<List<Character>> data = Input.readData(Year._2020, "day11.txt")
 				.map(s -> s.chars().mapToObj(c -> (char) c).collect(Collectors.toList()))
 				.collect(Collectors.toList());
 

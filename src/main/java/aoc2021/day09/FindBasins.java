@@ -20,7 +20,7 @@ public class FindBasins {
     }
 
     private static int[][] read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day09.txt");
+        Scanner sc = Input.openFile(Year._2021, "day09.txt");
         List<List<Integer>> read = new ArrayList<>();
         while (sc.hasNextLine()) {
             read.add(sc.nextLine().chars()

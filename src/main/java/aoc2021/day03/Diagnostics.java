@@ -72,7 +72,7 @@ public class Diagnostics {
     public static void main(String[] args) {
         // load data
         List<String> data = Input.collectDataToList(
-                Input.readData(Year.AOC_2021, "day03.txt"), DataType.WORD
+                Input.readData(Year._2021, "day03.txt"), DataType.WORD
         );
 
         // Part 1

@@ -132,7 +132,7 @@ public class ShipNavigation {
     }
 
     public static void main(String[] args) {
-        List<Instruction> instructions = Input.readData(Year.AOC_2020, "day12.txt")
+        List<Instruction> instructions = Input.readData(Year._2020, "day12.txt")
                 .map(s -> new Instruction(map.get(s.charAt(0)), Integer.parseInt(s.substring(1))))
                 .collect(Collectors.toList());
 

@@ -10,7 +10,7 @@ import library.io.Input;
 public class CustomCustoms {
 
 	public static List<String> read() {
-		return Arrays.stream(Input.readData(Year.AOC_2020, "day06.txt")
+		return Arrays.stream(Input.readData(Year._2020, "day06.txt")
 				.reduce("", (a, b) -> a += b + "\n")
 				.split("\n\n")).collect(Collectors.toList());
 	}

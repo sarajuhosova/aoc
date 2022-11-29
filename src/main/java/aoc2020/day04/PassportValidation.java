@@ -22,7 +22,7 @@ public class PassportValidation {
 			.collect(Collectors.toMap(Attribute::getCode, a -> a));
 
 	public static List<Map<Attribute, String>> read(Scanner sc) {
-		return Arrays.stream(Input.readData(Year.AOC_2020, "day04.txt")
+		return Arrays.stream(Input.readData(Year._2020, "day04.txt")
 				.reduce("", (a, b) -> a += b + "\n")
 				.split("\n\n")).map(
 						p -> Arrays.stream(p.split(" |\n"))
@@ -80,7 +80,7 @@ public class PassportValidation {
 	}
 
 	public static void main(String[] args) {
-		Scanner sc = Input.openFile(Year.AOC_2020, "day4.txt");
+		Scanner sc = Input.openFile(Year._2020, "day4.txt");
 		List<Map<Attribute, String>> data = read(sc);
 
 		attributes.remove(Attribute.COUNTRY_ID);

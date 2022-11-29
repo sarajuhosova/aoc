@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Navigation {
 
     private static List<Instruction> read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day02.txt");
+        Scanner sc = Input.openFile(Year._2021, "day02.txt");
         List<Instruction> data = new ArrayList<>();
         while (sc.hasNextLine()) {
             data.add(new Instruction(

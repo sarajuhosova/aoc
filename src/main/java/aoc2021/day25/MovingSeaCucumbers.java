@@ -14,7 +14,7 @@ import static aoc2021.day25.Direction.*;
 public class MovingSeaCucumbers {
 
     private static List<List<Direction>> read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day25.txt");
+        Scanner sc = Input.openFile(Year._2021, "day25.txt");
 
         List<List<Direction>> direction = new ArrayList<>();
         while (sc.hasNextLine()) {

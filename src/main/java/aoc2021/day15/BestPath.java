@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class BestPath {
 
     private static List<List<Integer>> read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day15.txt");
+        Scanner sc = Input.openFile(Year._2021, "day15.txt");
 
         List<List<Integer>> data = new ArrayList<>();
         while (sc.hasNextLine()) {

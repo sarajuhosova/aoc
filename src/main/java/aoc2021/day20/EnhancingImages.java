@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class EnhancingImages {
 
     private static Pair<String, List<String>> read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day20.txt");
+        Scanner sc = Input.openFile(Year._2021, "day20.txt");
         String algorithms = sc.nextLine().chars()
                 .mapToObj(c -> (c == '#' ? "1" : "0"))
                 .collect(Collectors.joining());

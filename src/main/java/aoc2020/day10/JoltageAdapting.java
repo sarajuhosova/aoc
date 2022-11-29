@@ -50,7 +50,7 @@ public class JoltageAdapting {
 
 	public static void main(String[] args) {
 		// Read and Sort data
-		List<Integer> data = Input.readData(Year.AOC_2020, "day10.txt")
+		List<Integer> data = Input.readData(Year._2020, "day10.txt")
 				.map(Integer::parseInt)
 				.sorted()
 				.collect(Collectors.toList());

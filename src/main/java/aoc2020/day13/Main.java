@@ -70,7 +70,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner sc = Input.openFile(Year.AOC_2020, "day13.txt");
+        Scanner sc = Input.openFile(Year._2020, "day13.txt");
 
         long earliest = Long.parseLong(sc.nextLine());
         String[] data = sc.nextLine().split(",");

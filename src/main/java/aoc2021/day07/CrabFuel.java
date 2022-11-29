@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class CrabFuel {
 
     private static List<Integer> read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day07.txt");
+        Scanner sc = Input.openFile(Year._2021, "day07.txt");
 
         return Arrays.stream(sc.nextLine().split(","))
                 .map(Integer::parseInt)

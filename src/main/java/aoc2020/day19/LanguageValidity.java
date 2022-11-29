@@ -4,7 +4,6 @@ import library.Year;
 import library.io.Input;
 
 import java.util.*;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -111,7 +110,7 @@ public class LanguageValidity {
 //        System.out.println(getValidStringsRecursion(0));
 //        sc.close();
 
-        Scanner sc2 = Input.openFile(Year.AOC_2020, "day19_changed.txt");
+        Scanner sc2 = Input.openFile(Year._2020, "day19_changed.txt");
         parse(sc2);
         System.out.println(getValidStringsRecursion(0));
         sc2.close();

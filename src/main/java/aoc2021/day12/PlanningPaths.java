@@ -4,12 +4,11 @@ import library.Year;
 import library.io.Input;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class PlanningPaths {
 
     private static Map<String, Cave> read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day12.txt");
+        Scanner sc = Input.openFile(Year._2021, "day12.txt");
 
         Map<String, Cave> caves = new HashMap<>();
         while (sc.hasNextLine()) {

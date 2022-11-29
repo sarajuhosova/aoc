@@ -62,7 +62,7 @@ public class ExpenseReport {
 		System.out.println("Hello, Advent of Code 2020!");
 
 		// load data
-		nums = Input.collectDataToSet(Input.readData(Year.AOC_2020, "day01.txt"), DataType.INT);
+		nums = Input.collectDataToSet(Input.readData(Year._2020, "day01.txt"), DataType.INT);
 
 		// Part 1
 		System.out.println(getTwoMultipliers());

@@ -47,7 +47,7 @@ public class XMASProtocol {
 
 	public static void main(String[] args) {
 		// read data
-		List<Long> values = Input.readData(Year.AOC_2020, "day09.txt")
+		List<Long> values = Input.readData(Year._2020, "day09.txt")
 				.map(Long::parseLong)
 				.collect(Collectors.toList());
 

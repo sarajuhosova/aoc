@@ -37,7 +37,7 @@ public class NumberGames {
 
     public static void main(String[] args) {
         List<Integer> data = Input.collectDataToList(
-                Input.readData(Year.AOC_2020, "day15.txt", ","),
+                Input.readData(Year._2020, "day15.txt", ","),
                 DataType.INT
         );
 

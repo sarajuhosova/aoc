@@ -23,7 +23,7 @@ public class DigitalClock {
     }
 
     private static Map<List<Set<Character>>, String[]> read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day08.txt");
+        Scanner sc = Input.openFile(Year._2021, "day08.txt");
 
         Map<List<Set<Character>>, String[]> result = new HashMap<>();
         while (sc.hasNextLine()) {

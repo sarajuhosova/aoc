@@ -10,7 +10,7 @@ import library.io.Input;
 public class Day6 {
 
 	public static long part1() {
-		return Arrays.stream(Input.readData(Year.AOC_2020, "day6.txt")
+		return Arrays.stream(Input.readData(Year._2020, "day6.txt")
 				.reduce("", (a, b) -> a += b + "\n")
 				.split("\n\n"))
 				.map(p -> p.replace("\n", ""))
@@ -19,7 +19,7 @@ public class Day6 {
 	}
 
 	public static long part2() {
-		return Arrays.stream(Input.readData(Year.AOC_2020, "day6.txt")
+		return Arrays.stream(Input.readData(Year._2020, "day6.txt")
 				.reduce("", (a, b) -> a += b + "\n")
 				.split("\n\n"))
 				.mapToInt(p -> Arrays.stream(p.split("\n"))

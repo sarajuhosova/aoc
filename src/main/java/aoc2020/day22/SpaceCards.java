@@ -109,7 +109,7 @@ public class SpaceCards {
     }
 
     public static void main(String[] args) {
-        Scanner sc = Input.openFile(Year.AOC_2020, "day22.txt");
+        Scanner sc = Input.openFile(Year._2020, "day22.txt");
         QueuePair deal = parse(sc);
 
         System.out.println(determineCombatWinner(deepCopy(deal)));

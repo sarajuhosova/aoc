@@ -68,7 +68,7 @@ public class Jigsaw {
     }
 
     public static void main(String[] args) {
-        Scanner sc = Input.openFile(Year.AOC_2020, "day20.txt");
+        Scanner sc = Input.openFile(Year._2020, "day20.txt");
         List<Tile> tiles = parse(sc);
         sc.close();
 

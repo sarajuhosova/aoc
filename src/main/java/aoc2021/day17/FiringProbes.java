@@ -8,7 +8,7 @@ import library.tuple.Pair;
 public class FiringProbes {
 
     private static Pair<Point, Point> read() {
-        String data = Input.openFile(Year.AOC_2021, "day17.txt").nextLine().substring(15);
+        String data = Input.openFile(Year._2021, "day17.txt").nextLine().substring(15);
 
         int index = data.indexOf('.');
         int x_s = Integer.parseInt(data.substring(0, index));

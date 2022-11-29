@@ -132,7 +132,7 @@ public class TicketDecoding {
     }
 
     public static void main(String[] args) {
-        Scanner sc = Input.openFile(Year.AOC_2020, "day16.txt");
+        Scanner sc = Input.openFile(Year._2020, "day16.txt");
         read(sc);
 
         System.out.println(part1());

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class FoldingPaper {
 
     private static Pair<Set<Point>, List<Fold>> read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day13.txt");
+        Scanner sc = Input.openFile(Year._2021, "day13.txt");
 
         Set<Point> points = new HashSet<>();
         List<Fold> folds = new ArrayList<>();

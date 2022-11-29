@@ -1,23 +1,14 @@
 package library;
 
 public enum Year {
-	AOC_2019(
-		"2019"
-	),
-	AOC_2020(
-		"2020"
-	),
-    AOC_2021(
-            "2021"
-    );
-
-	String yearString;
-
-	Year(String string) {
-		this.yearString = string;
-	}
+    _2020,
+    _2019,
+    _2021,
+    _2022;
 
 	public String getDirectory() {
-		return "aoc" + yearString;
+		return this.name()
+                .toLowerCase()
+                .replace("_", "aoc");
 	}
 }

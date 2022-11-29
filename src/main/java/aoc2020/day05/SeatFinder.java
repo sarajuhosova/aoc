@@ -45,7 +45,7 @@ public class SeatFinder {
 	 *         boarding pass?
 	 */
 	public static int highestSeat() {
-		return Input.readData(Year.AOC_2020, "day5.txt")
+		return Input.readData(Year._2020, "day5.txt")
 				.map(s -> s.replace('B', '1')
 						.replace('F', '0')
 						.replace('R', '1')
@@ -65,7 +65,7 @@ public class SeatFinder {
 	 * @return What is the ID of your seat?
 	 */
 	public static int leftoverSeat() {
-		Set<Integer> data = Input.readData(Year.AOC_2020, "day05.txt")
+		Set<Integer> data = Input.readData(Year._2020, "day05.txt")
 				.map(s -> s.replace('B', '1')
 						.replace('F', '0')
 						.replace('R', '1')

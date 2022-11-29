@@ -28,7 +28,7 @@ public class KeyCardDecryption {
     }
 
     public static void main(String[] args) {
-        Scanner sc = Input.openFile(Year.AOC_2020, "day25.txt");
+        Scanner sc = Input.openFile(Year._2020, "day25.txt");
         int cardKey = sc.nextInt();
         int doorKey = sc.nextInt();
 

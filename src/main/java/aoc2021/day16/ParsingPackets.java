@@ -8,7 +8,7 @@ public class ParsingPackets {
 
     private static Packet read() {
         Pair<Packet, String> pair =
-                Packet.read(Converter.read(Input.openFile(Year.AOC_2021, "day16.txt").nextLine()));
+                Packet.read(Converter.read(Input.openFile(Year._2021, "day16.txt").nextLine()));
         System.out.println("Leftover string is \"" + pair.getSecond() + "\".");
         return pair.getFirst();
     }

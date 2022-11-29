@@ -10,7 +10,7 @@ import java.util.Set;
 public class FlashingOctopi {
 
     private static int[][] read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day11.txt");
+        Scanner sc = Input.openFile(Year._2021, "day11.txt");
         int[][] map = new int[10][10];
         for (int i = 0; i < 10; i++) {
             String line = sc.nextLine();

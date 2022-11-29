@@ -79,7 +79,7 @@ public class TobogganPath {
 
 	public static void main(String[] args) {
 		List<String> patterns = Input.collectDataToList(
-				Input.readData(Year.AOC_2020, "day03.txt"), DataType.WORD);
+				Input.readData(Year._2020, "day03.txt"), DataType.WORD);
 
 		// Part 1
 		System.out.println(getInitialPath(patterns));

@@ -76,7 +76,7 @@ public class NavigationSubsystem {
     public static void main(String[] args) {
         // load data
         List<String> lines = Input.collectDataToList(
-                Input.readData(Year.AOC_2021, "day10.txt"), DataType.LINE
+                Input.readData(Year._2021, "day10.txt"), DataType.LINE
         );
 
         // Part 1

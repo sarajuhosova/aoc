@@ -149,7 +149,7 @@ public class Jigsaw {
     }
 
     private static char[][] readMonster() {
-        List<String> lines = Input.readData(Year.AOC_2020, "day20_monster.txt")
+        List<String> lines = Input.readData(Year._2020, "day20_monster.txt")
                 .collect(Collectors.toList());
 
         char[][] monster = new char[lines.size()][lines.get(0).length()];
@@ -208,7 +208,7 @@ public class Jigsaw {
     }
 
     public static void main(String[] args) {
-        Scanner sc = Input.openFile(Year.AOC_2020, "day20.txt");
+        Scanner sc = Input.openFile(Year._2020, "day20.txt");
         parse(sc);
         sc.close();
 

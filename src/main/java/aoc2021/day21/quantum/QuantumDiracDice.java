@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class QuantumDiracDice {
 
     private static Pair<Integer, Integer> read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day21.txt");
+        Scanner sc = Input.openFile(Year._2021, "day21.txt");
         return new Pair<>(
                 Integer.parseInt(sc.nextLine().substring(28)),
                 Integer.parseInt(sc.nextLine().substring(28))

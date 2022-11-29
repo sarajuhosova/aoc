@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class SnailFishHomework {
 
     private static List<SnailFishNumber> read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day18.txt");
+        Scanner sc = Input.openFile(Year._2021, "day18.txt");
 
         List<SnailFishNumber> numbers = new ArrayList<>();
         while (sc.hasNextLine()) {

@@ -94,7 +94,7 @@ public class FoodAllergies {
     }
 
     public static void main(String[] args) {
-        List<String> data = Input.readData(Year.AOC_2020, "day21.txt").collect(Collectors.toList());
+        List<String> data = Input.readData(Year._2020, "day21.txt").collect(Collectors.toList());
         List<Food> foods = parse(data);
 
         Map<String, String> map = matchAllergens(foods);

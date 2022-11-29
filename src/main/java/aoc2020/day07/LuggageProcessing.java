@@ -91,7 +91,7 @@ public class LuggageProcessing {
 	}
 
 	public static void main(String[] args) {
-		Scanner sc = Input.openFile(Year.AOC_2020, "day07.txt");
+		Scanner sc = Input.openFile(Year._2020, "day07.txt");
 
 		List<Bag> bags = read(sc);
 

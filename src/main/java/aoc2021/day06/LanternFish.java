@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class LanternFish {
 
     private static List<Integer> read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day06.txt");
+        Scanner sc = Input.openFile(Year._2021, "day06.txt");
 
         return Arrays.stream(sc.nextLine().split(","))
                 .map(Integer::parseInt)

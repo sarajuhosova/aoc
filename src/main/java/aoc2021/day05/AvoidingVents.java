@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class AvoidingVents {
 
     private static List<Line> read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day05.txt");
+        Scanner sc = Input.openFile(Year._2021, "day05.txt");
         List<Line> lines = new ArrayList<>();
         while (sc.hasNextLine())
             lines.add(Line.read(sc));

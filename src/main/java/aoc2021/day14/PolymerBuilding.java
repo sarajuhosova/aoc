@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class PolymerBuilding {
 
     private static Pair<String, Map<String, Character>> read() {
-        Scanner sc = Input.openFile(Year.AOC_2021, "day14.txt");
+        Scanner sc = Input.openFile(Year._2021, "day14.txt");
 
         String start = sc.nextLine();
         sc.nextLine();
