@@ -1,4 +1,4 @@
-package aoc2021.day1
+package aoc2021.day01
 
 import library.Year
 import library.readInts

@@ -1,4 +1,4 @@
-package aoc2021.day2
+package aoc2021.day02
 
 abstract class Position {
     abstract val horizontal: Int
