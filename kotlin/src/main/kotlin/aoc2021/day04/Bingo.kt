@@ -33,7 +33,7 @@ fun parse(lines: List<String>): Pair<List<Int>, List<Board>> =
     )
 
 fun main() {
-    val data = readData(Year._2021, "day04_example.txt")
+    val data = readData(Year._2021, "day04_e.txt")
 
     parse(data)
 }
