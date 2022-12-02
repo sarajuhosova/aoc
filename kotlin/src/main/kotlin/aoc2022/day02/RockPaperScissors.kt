@@ -2,26 +2,22 @@ package aoc2022.day02
 
 import library.Year
 import library.readData
-import java.lang.IllegalArgumentException
+
+fun getScore(you: Int, them: Int): Long =
+    if (you == (them + 1) % 3) 6 else (if (you == them) 3 else 0)
 
 fun evalGame(line: String, getYou: (Int, Int) -> Int): Long {
     val split = line.split(" ")
 
-    val opponent = split[0][0] - 'A'
-    val you = getYou(opponent, split[1][0] - 'X')
+    val them = split[0][0] - 'A'
+    val you = getYou(them, split[1][0] - 'X')
 
-    return (if (you == (opponent + 1) % 3) 6 else (if (you == opponent) 3 else 0)) + you + 1L
+    // score:          outcome + shape
+    return getScore(you, them) + (you + 1L)
 }
 
 val determine: (Int, Int) -> Int
-    get() = { o, y ->
-        when (y) {
-            0 -> (o - 1 + 3) % 3
-            1 -> o
-            2 -> (o + 1) % 3
-            else -> throw IllegalArgumentException()
-        }
-    }
+    get() = { o, y -> ((o + (y - 1)) + 3) % 3 }
 
 fun main() {
     val data = readData(Year._2022, "day02.txt")
