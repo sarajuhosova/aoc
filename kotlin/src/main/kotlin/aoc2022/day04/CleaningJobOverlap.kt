@@ -1,12 +1,13 @@
 package aoc2022.day04
 
 import library.Year
+import library.parseRegex
 import library.readData
 
 fun parse(line: String): Pair<Pair<Int, Int>, Pair<Int, Int>> {
-    val data = Regex("([0-9]+)-([0-9]+),([0-9]+)-([0-9]+)")
-        .find(line)!!.destructured.toList()
-        .map { it.toInt() }
+    val data = parseRegex(
+        "([0-9]+)-([0-9]+),([0-9]+)-([0-9]+)", line
+    ).map { it.toInt() }
 
     return Pair(Pair(data[0], data[1]), Pair(data[2], data[3]))
 }
