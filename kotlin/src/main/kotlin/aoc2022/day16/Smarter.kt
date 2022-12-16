@@ -47,7 +47,7 @@ fun canReach(
 ): Boolean =
     (0 until relevant.size / 2)
         .sumOf {
-            (minute - (it * 3)) * (valves[relevant[it * 2]]!!.flowRate + valves[relevant[it * 2 + 1]]!!.flowRate)
+            (minute - it) * (valves[relevant[it * 2]]!!.flowRate + valves[relevant[it * 2 + 1]]!!.flowRate)
         } > min
 
 fun calculate(
@@ -70,7 +70,7 @@ fun possibilitiesWithElephant(
     minute: Int,
     min: Int
 ): List<Pair<MutableList<String>, MutableList<String>>> {
-    if (!canReach(valves, relevant, minute, min) || minute <= 0 || relevant.isEmpty()) {
+    if (!canReach(valves, relevant, minute, min) || minute < 0 || relevant.isEmpty()) {
         return listOf(Pair(mutableListOf(), mutableListOf()))
     }
 
