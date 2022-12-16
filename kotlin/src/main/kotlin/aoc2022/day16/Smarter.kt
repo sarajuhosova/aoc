@@ -1,6 +1,7 @@
 package aoc2022.day16
 
 import kotlin.math.max
+import kotlin.math.min
 
 fun possibilities(
     relevant: List<String>,
@@ -49,12 +50,23 @@ fun canReach(
             (minute - (it * 3)) * (valves[relevant[it * 2]]!!.flowRate + valves[relevant[it * 2 + 1]]!!.flowRate)
         } > min
 
+fun calculate(
+    valves: Map<String, Valve>,
+    paths: Map<String, Map<String, Int>>,
+    minute: Int,
+    pred: Pair<List<String>, List<String>>,
+    it: Pair<MutableList<String>, MutableList<String>>
+): Int =
+    calculateFlow(valves, countSteps(pred.first + it.first, paths, minute)) + calculateFlow(valves, countSteps(pred.second + it.second, paths, minute))
+
 fun possibilitiesWithElephant(
+    pred: Pair<List<String>, List<String>>,
     valves: Map<String, Valve>,
     relevant: List<String>,
     location: Pair<String, String>,
     toGo: Pair<Int, Int>,
     paths: Map<String, Map<String, Int>>,
+    startMinute: Int,
     minute: Int,
     min: Int
 ): List<Pair<MutableList<String>, MutableList<String>>> {
@@ -67,26 +79,32 @@ fun possibilitiesWithElephant(
     if (toGo.first > 0) {
         if (toGo.second > 0) {
             possibilitiesWithElephant(
-                valves, relevant, location, Pair(toGo.first - 1, toGo.second - 1), paths, minute - 1, min
+                pred, valves, relevant, location, Pair(toGo.first - 1, toGo.second - 1), paths, startMinute, minute - 1, min
             ).forEach {
                 result.add(it)
             }
         } else {
             for (r in relevant) {
                 val time = paths[location.second]!![r]!!
-
-                possibilitiesWithElephant(
+                var possibilities =possibilitiesWithElephant(
+                    Pair(pred.first, listOf(r) + pred.second),
                     valves,
                     relevant.filter { it != r },
                     Pair(location.first, r),
                     Pair(toGo.first - 1, time),
                     paths,
+                    startMinute,
                     minute - 1,
                     min - ((minute - time) * valves[r]!!.flowRate)
-                ).forEach {
-                    it.second.add(0, r)
-                    result.add(it)
+                )
+                if (possibilities.isEmpty()) {
+                    possibilities = listOf(Pair(mutableListOf(), mutableListOf()))
                 }
+                possibilities.forEach {
+                    it.second.add(0, r)
+                }
+                val max = possibilities.maxBy { calculate(valves, paths, startMinute, pred, it) }
+                result.add(max)
             }
         }
     } else {
@@ -94,18 +112,25 @@ fun possibilitiesWithElephant(
             for (r in relevant) {
                 val time = paths[location.first]!![r]!!
 
-                possibilitiesWithElephant(
+                var possibilities = possibilitiesWithElephant(
+                    Pair(listOf(r) + pred.first, pred.second),
                     valves,
                     relevant.filter { it != r },
                     Pair(r, location.second),
                     Pair(time, toGo.second - 1),
                     paths,
+                    startMinute,
                     minute - 1,
                     min - ((minute - time) * valves[r]!!.flowRate)
-                ).forEach {
-                    it.first.add(0, r)
-                    result.add(it)
+                )
+                if (possibilities.isEmpty()) {
+                    possibilities = listOf(Pair(mutableListOf(), mutableListOf()))
                 }
+                possibilities.forEach {
+                    it.first.add(0, r)
+                }
+                val max = possibilities.maxBy { calculate(valves, paths, startMinute, pred, it) }
+                result.add(max)
             }
         } else {
             for (r1 in relevant) {
@@ -114,19 +139,26 @@ fun possibilitiesWithElephant(
                     val time1 = paths[location.first]!![r1]!!
                     val time2 = paths[location.first]!![r2]!!
 
-                    possibilitiesWithElephant(
+                    var possibilities = possibilitiesWithElephant(
+                        Pair(listOf(r1) + pred.first, listOf(r2) + pred.second),
                         valves,
                         relevant.filter { it != r1 && it != r2 },
                         Pair(r1, r2),
                         Pair(time1, time2),
                         paths,
+                        startMinute,
                         minute - 1,
                         min - ((minute - max(time1, time2)) * (valves[r1]!!.flowRate + valves[r2]!!.flowRate))
-                    ).forEach {
+                    )
+                    if (possibilities.isEmpty()) {
+                        possibilities = listOf(Pair(mutableListOf(), mutableListOf()))
+                    }
+                    possibilities.forEach {
                         it.first.add(0, r1)
                         it.second.add(0, r2)
-                        result.add(it)
                     }
+                    val max = possibilities.maxBy { calculate(valves, paths, startMinute, pred, it) }
+                    result.add(max)
                 }
             }
         }
@@ -143,11 +175,13 @@ fun findLargestSmarterWithElephant(
     val shortest = nonZero.plus(initial).associateWith { shortestPath(valves, it) }
 
     val possibilities = possibilitiesWithElephant(
+        Pair(listOf(initial), listOf(initial)),
         valves,
         nonZero,
-        Pair("AA", "AA"),
+        Pair(initial, initial),
         Pair(0, 0),
         shortest,
+        minutes,
         minutes,
         min
     )
