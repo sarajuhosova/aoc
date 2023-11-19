@@ -1,6 +1,6 @@
 module Main where
 
-import AoC2021.Day07
+import AoC2022.Day01
 
 main :: IO ()
 main = output
