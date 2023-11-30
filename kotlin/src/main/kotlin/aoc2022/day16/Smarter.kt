@@ -77,89 +77,86 @@ fun possibilitiesWithElephant(
     val result = mutableListOf<Pair<MutableList<String>, MutableList<String>>>()
 
     if (toGo.first > 0) {
-        if (toGo.second > 0) {
-            possibilitiesWithElephant(
-                pred, valves, relevant, location, Pair(toGo.first - 1, toGo.second - 1), paths, startMinute, minute - 1, min
-            ).forEach {
-                result.add(it)
+        for (r in relevant) {
+            val time = paths[location.second]!![r]!!
+
+            val move = min(time, toGo.first - 1)
+
+            var possibilities =possibilitiesWithElephant(
+                Pair(pred.first, listOf(r) + pred.second),
+                valves,
+                relevant.filter { it != r },
+                Pair(location.first, r),
+                Pair((toGo.first - 1) - move, time - move),
+                paths,
+                startMinute,
+                minute - 1 - move,
+                min - ((minute - time) * valves[r]!!.flowRate)
+            )
+            if (possibilities.isEmpty()) {
+                possibilities = listOf(Pair(mutableListOf(), mutableListOf()))
             }
-        } else {
-            for (r in relevant) {
-                val time = paths[location.second]!![r]!!
-                var possibilities =possibilitiesWithElephant(
-                    Pair(pred.first, listOf(r) + pred.second),
-                    valves,
-                    relevant.filter { it != r },
-                    Pair(location.first, r),
-                    Pair(toGo.first - 1, time),
-                    paths,
-                    startMinute,
-                    minute - 1,
-                    min - ((minute - time) * valves[r]!!.flowRate)
-                )
-                if (possibilities.isEmpty()) {
-                    possibilities = listOf(Pair(mutableListOf(), mutableListOf()))
-                }
-                possibilities.forEach {
-                    it.second.add(0, r)
-                }
-                val max = possibilities.maxBy { calculate(valves, paths, startMinute, pred, it) }
-                result.add(max)
+            possibilities.forEach {
+                it.second.add(0, r)
             }
+            val max = possibilities.maxBy { calculate(valves, paths, startMinute, pred, it) }
+            result.add(max)
+        }
+    } else if (toGo.second > 0) {
+        for (r in relevant) {
+            val time = paths[location.first]!![r]!!
+
+            val move = min(time, toGo.second - 1)
+
+            var possibilities = possibilitiesWithElephant(
+                Pair(listOf(r) + pred.first, pred.second),
+                valves,
+                relevant.filter { it != r },
+                Pair(r, location.second),
+                Pair(time - move, (toGo.second - 1) - move),
+                paths,
+                startMinute,
+                minute - 1 - move,
+                min - ((minute - time) * valves[r]!!.flowRate)
+            )
+            if (possibilities.isEmpty()) {
+                possibilities = listOf(Pair(mutableListOf(), mutableListOf()))
+            }
+            possibilities.forEach {
+                it.first.add(0, r)
+            }
+            val max = possibilities.maxBy { calculate(valves, paths, startMinute, pred, it) }
+            result.add(max)
         }
     } else {
-        if (toGo.second > 0) {
-            for (r in relevant) {
-                val time = paths[location.first]!![r]!!
+        for (r1 in relevant) {
+            for (r2 in relevant) {
+                if (r1 == r2) continue
+                val time1 = paths[location.first]!![r1]!!
+                val time2 = paths[location.first]!![r2]!!
+
+                val move = min(time1, time2)
 
                 var possibilities = possibilitiesWithElephant(
-                    Pair(listOf(r) + pred.first, pred.second),
+                    Pair(listOf(r1) + pred.first, listOf(r2) + pred.second),
                     valves,
-                    relevant.filter { it != r },
-                    Pair(r, location.second),
-                    Pair(time, toGo.second - 1),
+                    relevant.filter { it != r1 && it != r2 },
+                    Pair(r1, r2),
+                    Pair(time1 - move, time2 - move),
                     paths,
                     startMinute,
-                    minute - 1,
-                    min - ((minute - time) * valves[r]!!.flowRate)
+                    minute - 1 - move,
+                    min - ((minute - max(time1, time2)) * (valves[r1]!!.flowRate + valves[r2]!!.flowRate))
                 )
                 if (possibilities.isEmpty()) {
                     possibilities = listOf(Pair(mutableListOf(), mutableListOf()))
                 }
                 possibilities.forEach {
-                    it.first.add(0, r)
+                    it.first.add(0, r1)
+                    it.second.add(0, r2)
                 }
                 val max = possibilities.maxBy { calculate(valves, paths, startMinute, pred, it) }
                 result.add(max)
-            }
-        } else {
-            for (r1 in relevant) {
-                for (r2 in relevant) {
-                    if (r1 == r2) continue
-                    val time1 = paths[location.first]!![r1]!!
-                    val time2 = paths[location.first]!![r2]!!
-
-                    var possibilities = possibilitiesWithElephant(
-                        Pair(listOf(r1) + pred.first, listOf(r2) + pred.second),
-                        valves,
-                        relevant.filter { it != r1 && it != r2 },
-                        Pair(r1, r2),
-                        Pair(time1, time2),
-                        paths,
-                        startMinute,
-                        minute - 1,
-                        min - ((minute - max(time1, time2)) * (valves[r1]!!.flowRate + valves[r2]!!.flowRate))
-                    )
-                    if (possibilities.isEmpty()) {
-                        possibilities = listOf(Pair(mutableListOf(), mutableListOf()))
-                    }
-                    possibilities.forEach {
-                        it.first.add(0, r1)
-                        it.second.add(0, r2)
-                    }
-                    val max = possibilities.maxBy { calculate(valves, paths, startMinute, pred, it) }
-                    result.add(max)
-                }
             }
         }
     }

@@ -24,7 +24,7 @@ fun parse(data: List<String>): Map<String, Valve> =
         .associate { it.first[0] to Valve(it.first[1].toInt(), it.second) }
 
 fun main() {
-    val valves = parse(readData(Year._2022, "day16.txt"))
+    val valves = parse(readData(Year._2022, "day16_e.txt"))
 
     val largest = findLargestSmarter(valves, 30)
     println(largest)
