@@ -1,5 +1,7 @@
 package library
 
+fun List<String>.parseInts(): List<Int> = map { it.toInt() }
+
 fun <T> parseAsGrouped(
     data: List<String>,
     delimiter: String,

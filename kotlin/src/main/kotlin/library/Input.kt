@@ -1,6 +1,7 @@
 package library
 
 import java.io.File
+import java.security.InvalidParameterException
 
 fun readFirst(year: Year, filename: String): String =
     File("src/main/resources/" + year.directory + "/" + filename)
@@ -11,6 +12,13 @@ fun readData(year: Year, filename: String): List<String> =
     File("src/main/resources/" + year.directory + "/" + filename)
         .bufferedReader()
         .readLines()
+
+fun readData(year: Year, day: Int, trail: String = ""): List<String> {
+    if (day < 1 || day > 25) {
+        throw InvalidParameterException("Day must be between 1 and 25")
+    }
+    return readData(year, String.format("day%02d%s.txt", day, trail))
+}
 
 fun readInts(year: Year, filename: String) : List<Int> =
     readData(year, filename).map { it.toInt() }
