@@ -1,8 +1,7 @@
 package aoc2022.day17
 
-import aoc2021.day02.followAim
 import library.Year
-import library.parseAsGrouped
+import library.parseByGroup
 import library.readData
 import library.readFirst
 
@@ -28,7 +27,7 @@ data class Piece(
 }
 
 fun parsePieces(data: List<String>): List<Piece> =
-    parseAsGrouped(data, "") { lines ->
+    parseByGroup(data, "") { lines ->
         Piece(lines.map { it.map { c -> c == '#' } }.reversed())
     }
 

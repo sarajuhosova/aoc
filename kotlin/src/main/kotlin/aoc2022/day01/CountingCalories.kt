@@ -14,10 +14,10 @@ fun sumMaxes(list: List<Long>, amount: Int): Long =
 fun main() {
     println("Hello, Advent of Code 2022!")
 
-    val data = parseAsGrouped(
+    val data = parseByGroup(
         readData(Year._2022, "day01.txt"),
         ""
-    ) { d -> d.map { it.toLong() }.sumOf() }
+    ) { d -> d.map { it.toLong() }.sum() }
 
     println(data.max())
     println(sumMaxes(data, 3))

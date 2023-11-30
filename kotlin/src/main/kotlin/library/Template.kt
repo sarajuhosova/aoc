@@ -1,11 +1,11 @@
 package library
 
 fun part1(data: List<String>): Int {
-    return 0;
+    return 0
 }
 
 fun part2(data: List<String>): Int {
-    return 0;
+    return 0
 }
 
 fun main() {

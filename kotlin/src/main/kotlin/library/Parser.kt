@@ -2,7 +2,7 @@ package library
 
 fun List<String>.parseInts(): List<Int> = map { it.toInt() }
 
-fun <T> parseAsGrouped(
+fun <T> parseByGroup(
     data: List<String>,
     delimiter: String,
     mapper: (List<String>) -> T
@@ -11,10 +11,12 @@ fun <T> parseAsGrouped(
         0 -> emptyList()
         else -> {
             val (group, next) = getFirstGroup(data, delimiter)
-            listOf(mapper(group)) + parseAsGrouped(next, delimiter, mapper)
+            listOf(mapper(group)) + parseByGroup(next, delimiter, mapper)
         }
     }
 }
+
+fun <T> List<String>.parseByGroup(mapper: (List<String>) -> T) = parseByGroup(this, "", mapper)
 
 fun parseRegex(regex: String, line: String): List<String> =
     Regex(regex).find(line)!!.destructured.toList()

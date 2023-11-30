@@ -46,7 +46,7 @@ fun parseMonkey(lines: List<String>): Pair<Int, Monkey> {
 }
 
 fun parse(data: List<String>): Map<Int, Monkey> =
-    parseAsGrouped(data, "") {d -> parseMonkey(d)}.toMap()
+    parseByGroup(data, "") { d -> parseMonkey(d)}.toMap()
 
 fun executeRound(monkeys: Map<Int, Monkey>, divisor: Long, modulo: Long) =
     (0 until monkeys.size).map { monkeys[it]!! }
