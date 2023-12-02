@@ -16,4 +16,6 @@ fun <T> List<T>.removeFirst(value: T): List<T> =
 
 fun List<Long>.sum() = fold(0L) { acc, l -> l + acc }
 
+fun List<Int>.product(): Int = fold(1) { acc, l -> l * acc }
+fun List<Int>.longProduct(): Long = fold(1L) { acc, l -> l * acc }
 fun List<Long>.product() = fold(1L) { acc, l -> l * acc }
