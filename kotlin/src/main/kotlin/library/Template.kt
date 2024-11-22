@@ -9,9 +9,7 @@ fun part2(data: List<String>): Int {
 }
 
 fun main() {
-    println("Hello, Advent of Code!")
-
-    val data = readData(Year._2023, 1)
+    val data = readData(Year._2024, 1)
 
     println(part1(data))
     println(part2(data))

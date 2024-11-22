@@ -4,6 +4,7 @@ import java.util.*
 
 enum class Year {
     _2016,
+    _2018,
     _2019,
     _2020,
     _2021,
