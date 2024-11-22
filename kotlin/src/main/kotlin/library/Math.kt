@@ -1,5 +1,8 @@
 package library
 
+fun pow(num: Int, power: Int): Int =
+    if (power <= 0) 1 else (num * pow(num, power - 1))
+
 // https://www.baeldung.com/kotlin/lcm
 fun lcm(a: Long, b: Long): Long {
     val larger = if (a > b) a else b

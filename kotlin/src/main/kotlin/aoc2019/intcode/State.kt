@@ -1,6 +1,13 @@
 package aoc2019.intcode
 
-data class State(private val memory: Memory) {
+import aoc2019.intcode.expections.ProgramHaltedException
+import aoc2019.intcode.instructions.Param
+import aoc2019.intcode.io.IO
+
+data class State(
+    private val memory: Memory,
+    private val io: IO
+) {
     // RUNNING
     private var running: Boolean = true
     fun isHalted() = !running
@@ -14,18 +21,25 @@ data class State(private val memory: Memory) {
     fun movePointer(move: Int) {
         ip += move
     }
+    fun setPointer(location: Int) {
+        ip = location
+    }
 
     // MEMORY
     fun read(offset: Int = 0): Int {
         check()
         return memory[ip + offset]
     }
-    fun readLoc(offset: Int = 0): Int {
+    fun read(param: Param): Int {
         check()
-        return memory[memory[ip + offset]]
+        return memory[param.getLocation(memory, ip)]
     }
-    fun updateLoc(value: Int, offset: Int = 0) {
+    fun update(value: Int, param: Param) {
         check()
-        memory[memory[ip + offset]] = value
+        memory[param.getLocation(memory, ip)] = value
     }
+
+    // IO
+    fun input(): Int = io.read()
+    fun output(value: Int) = io.write(value)
 }

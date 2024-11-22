@@ -8,12 +8,14 @@ fun main() {
     val computer = Computer(readFirst(Year._2019, 2))
 
     // part 1
-    println(computer.run(12, 2))
+    computer.run(12, 2)
+    println(computer.readResult())
 
     // part 2
     for (noun in 0..99) {
         for (verb in 0..99) {
-            val result = computer.run(noun, verb)
+            computer.run(noun, verb)
+            val result = computer.readResult()
             if (result == 19690720) {
                 println(100 * noun + verb)
                 break
