@@ -1,8 +1,11 @@
 package aoc2019.intcode
 
 import aoc2019.intcode.expections.ProgramHaltedException
+import aoc2019.intcode.instructions.Instruction
 import aoc2019.intcode.instructions.Param
+import aoc2019.intcode.instructions.ParamMode
 import aoc2019.intcode.io.IO
+import library.pow
 
 data class State(
     private val memory: Memory,
@@ -42,4 +45,30 @@ data class State(
     // IO
     fun input(): Int = io.read()
     fun output(value: Int) = io.write(value)
+
+    // EXECUTION
+    private fun nextInstruction(): Instruction {
+        return Instruction.getById(this.read() % 100)
+    }
+
+    private fun execute(instruction: Instruction) {
+        // resolve the parameters
+        val params = Array(instruction.arguments) { i ->
+            val position = pow(10, i + 2)
+            Param(ParamMode[(this.read() / position) % 10], i + 1)
+        }
+
+        // run the instruction
+        val jumped = instruction.action(this, params)
+
+        // update the pointer
+        if (!jumped) this.movePointer(instruction.arguments + 1)
+    }
+
+    fun execute() {
+        while (true) {
+            this.execute(this.nextInstruction())
+            if (this.isHalted()) return
+        }
+    }
 }

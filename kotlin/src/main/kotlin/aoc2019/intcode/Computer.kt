@@ -1,6 +1,5 @@
 package aoc2019.intcode
 
-import aoc2019.intcode.instructions.Instruction
 import aoc2019.intcode.io.DefaultIO
 import aoc2019.intcode.io.IO
 
@@ -11,7 +10,7 @@ data class Computer(
         .map { it.toInt() }.toTypedArray()
 
     private var last: Memory = memory.copy()
-    fun readResult(): Int = last[0]
+    fun readResult(index: Int = 0): Int = last[index]
 
     fun run(
         noun: Int = memory[1],
@@ -21,11 +20,7 @@ data class Computer(
         last = memory.copy()
         last[1] = noun
         last[2] = verb
-        val state = State(last, io)
-        while (true) {
-            Instruction.execute(state)
-            if (state.isHalted()) return
-        }
+        State(last, io).execute()
     }
 
 }
