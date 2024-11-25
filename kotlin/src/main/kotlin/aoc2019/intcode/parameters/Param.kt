@@ -1,4 +1,4 @@
-package aoc2019.intcode.instructions
+package aoc2019.intcode.parameters
 
 import aoc2019.intcode.Memory
 

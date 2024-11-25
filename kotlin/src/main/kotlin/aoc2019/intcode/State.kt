@@ -2,8 +2,8 @@ package aoc2019.intcode
 
 import aoc2019.intcode.expections.ProgramHaltedException
 import aoc2019.intcode.instructions.Instruction
-import aoc2019.intcode.instructions.Param
-import aoc2019.intcode.instructions.ParamMode
+import aoc2019.intcode.parameters.Param
+import aoc2019.intcode.parameters.ParamMode
 import aoc2019.intcode.io.IO
 import library.pow
 
@@ -47,27 +47,21 @@ data class State(
     fun output(value: Int) = io.write(value)
 
     // EXECUTION
-    private fun nextInstruction(): Instruction {
-        return Instruction.getById(this.read() % 100)
-    }
-
-    private fun execute(instruction: Instruction) {
-        // resolve the parameters
-        val params = Array(instruction.arguments) { i ->
-            val position = pow(10, i + 2)
-            Param(ParamMode[(this.read() / position) % 10], i + 1)
-        }
-
-        // run the instruction
-        val jumped = instruction.action(this, params)
-
-        // update the pointer
-        if (!jumped) this.movePointer(instruction.arguments + 1)
-    }
-
     fun execute() {
         while (true) {
-            this.execute(this.nextInstruction())
+            val data = this.read()
+
+            // prepare the instructions and parameters
+            val instruction = Instruction.get(data % 100)
+            val params = Array(instruction.arguments) { i ->
+                val position = pow(10, i + 2)
+                Param(ParamMode[(data / position) % 10], i + 1)
+            }
+
+            // update the state by executing the instruction
+            instruction.execute(this, params)
+
+            // check whether the execution was halted
             if (this.isHalted()) return
         }
     }
