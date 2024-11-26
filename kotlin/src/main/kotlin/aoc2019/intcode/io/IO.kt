@@ -1,6 +1,6 @@
 package aoc2019.intcode.io
 
-abstract class IO(private val settings: Array<Long>) {
+abstract class IO(private val settings: Array<Long> = arrayOf()) {
     private var pointer = -1
 
     abstract suspend fun provide(): Long
