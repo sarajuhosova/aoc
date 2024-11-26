@@ -21,12 +21,22 @@ data class State(
 
     // INSTRUCTION POINTER
     private var ip = 0
+    fun getIP() = ip
     fun movePointer(move: Int) {
         ip += move
     }
     fun setPointer(location: Int) {
         ip = location
     }
+
+    private var base = 0
+    fun getBase() = base
+    fun moveBase(offset: Int) {
+        base += offset
+    }
+
+    private fun getLocation(param: Param): Int =
+        param.mode.getLocation(this, param.offset)
 
     // MEMORY
     fun read(offset: Int = 0): Int {
@@ -35,11 +45,11 @@ data class State(
     }
     fun read(param: Param): Int {
         check()
-        return memory[param.getLocation(memory, ip)]
+        return memory[getLocation(param)]
     }
     fun update(value: Int, param: Param) {
         check()
-        memory[param.getLocation(memory, ip)] = value
+        memory[getLocation(param)] = value
     }
 
     // IO
@@ -63,12 +73,6 @@ data class State(
 
             // check whether the execution was halted
             if (this.isHalted()) return
-
-            keepAlive(instruction, params, data)
         }
     }
-}
-
-fun keepAlive(vararg bla: Any) {
-
 }

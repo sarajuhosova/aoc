@@ -34,6 +34,7 @@ interface Instruction {
             6 -> JUMP_IF_FALSE
             7 -> LESS_THAN
             8 -> EQUAL_TO
+            9 -> ADJUST_BASE
             99 -> HALT
             else -> throw UnknownInstructionException(opcode)
         }

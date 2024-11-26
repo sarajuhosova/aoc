@@ -1,16 +1,17 @@
 package aoc2019.intcode.parameters
 
-import aoc2019.intcode.Memory
+import aoc2019.intcode.State
 import aoc2019.intcode.expections.UnknownParamModeException
 
 enum class ParamMode(
-    val getLocation: (Memory, Int) -> Int
+    val getLocation: (State, Int) -> Int
 ) {
-    POSITION({ memory, index -> memory[index] }),
-    IMMEDIATE({ _, index -> index });
+    POSITION({ state, offset -> state.read(offset) }),
+    IMMEDIATE({ state, offset -> state.getIP() + offset }),
+    RELATION({ state, offset -> state.getBase() + state.read(offset) });
 
     companion object {
-        private val map = values().associateBy { it.ordinal }
+        private val map = entries.associateBy { it.ordinal }
         operator fun get(index: Int): ParamMode {
             if (index !in map) throw UnknownParamModeException(index)
             return map[index]!!
