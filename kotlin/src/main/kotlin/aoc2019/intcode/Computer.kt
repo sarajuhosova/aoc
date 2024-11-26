@@ -6,8 +6,7 @@ import aoc2019.intcode.io.IO
 data class Computer(
     private val input: String
 ) {
-    private val memory = input.split(",")
-        .map { it.toInt() }.toTypedArray()
+    private val memory: Memory = Memory(input)
 
     private var last: Memory = memory.copy()
     fun readResult(index: Int = 0): Int = last[index]
