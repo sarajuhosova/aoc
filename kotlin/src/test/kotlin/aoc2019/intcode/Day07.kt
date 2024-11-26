@@ -12,7 +12,7 @@ import kotlin.test.Test
 
 class Day07: ComputerTest(7) {
 
-    private val PART_1_EXAMPLES = listOf(
+    private val PART_1_EXAMPLES: List<Triple<String, List<Long>, Long>> = listOf(
         Triple("3,15,3,16,1002,16,10,16,1,16,15,15,4,15,99,0,0", listOf(4, 3, 2, 1, 0), 43210),
         Triple(
             "3,23,3,24,1002,24,10,24,1002,23,-1,23,"
@@ -41,7 +41,7 @@ class Day07: ComputerTest(7) {
         assertThat(findMaxSignal(computer(), listOf(0, 1, 2, 3, 4))).isEqualTo(273814)
     }
 
-    private val PART_2_EXAMPLES = listOf(
+    private val PART_2_EXAMPLES: List<Triple<String, List<Long>, Long>> = listOf(
         Triple(
             "3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,"
                     + "27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5",

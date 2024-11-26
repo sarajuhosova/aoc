@@ -7,7 +7,7 @@ object ADJUST_BASE: Instruction1 {
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override suspend fun State.exec(offset: Param): Boolean {
-        moveBase(read(offset))
+        moveBase(read(offset).toInt())
         return false
     }
 

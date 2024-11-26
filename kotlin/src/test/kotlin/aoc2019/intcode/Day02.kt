@@ -8,7 +8,7 @@ import kotlin.test.Test
 
 class Day02: ComputerTest(2) {
 
-    private val EXAMPLES = listOf(
+    private val EXAMPLES: List<Triple<String, Int, Long>> = listOf(
         Triple("1,9,10,3,2,3,11,0,99,30,40,50", 0, 3500),
         Triple("1,0,0,0,99", 0, 2),
         Triple("2,3,0,3,99", 3, 6),
@@ -41,12 +41,12 @@ class Day02: ComputerTest(2) {
     @Test
     fun part2Test() {
         runBlocking {
-            var expected: Int? = null
-            for (noun in 0..99) {
-                for (verb in 0..99) {
+            var expected: Long? = null
+            for (noun in 0L..99) {
+                for (verb in 0L..99) {
                     computer().run(noun, verb)
                     val result = computer().readResult()
-                    if (result == 19690720) {
+                    if (result == 19690720L) {
                         expected = 100 * noun + verb
                         break
                     }

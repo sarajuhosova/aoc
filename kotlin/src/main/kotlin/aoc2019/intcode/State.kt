@@ -39,27 +39,27 @@ data class State(
         param.mode.getLocation(this, param.offset)
 
     // MEMORY
-    fun read(offset: Int = 0): Int {
+    fun read(offset: Int = 0): Long {
         check()
         return memory[ip + offset]
     }
-    fun read(param: Param): Int {
+    fun read(param: Param): Long {
         check()
         return memory[getLocation(param)]
     }
-    fun update(value: Int, param: Param) {
+    fun update(value: Long, param: Param) {
         check()
         memory[getLocation(param)] = value
     }
 
     // IO
-    suspend fun input(): Int = io.read()
-    suspend fun output(value: Int) = io.write(value)
+    suspend fun input(): Long = io.read()
+    suspend fun output(value: Long) = io.write(value)
 
     // EXECUTION
     suspend fun execute() {
         while (true) {
-            val data = this.read()
+            val data = this.read().toInt()
 
             // prepare the instructions and parameters
             val instruction = Instruction.get(data % 100)

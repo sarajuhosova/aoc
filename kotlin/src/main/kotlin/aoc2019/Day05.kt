@@ -11,13 +11,13 @@ fun main() {
         val computer = Computer(readFirst(Year._2019, 5))
 
         class Part1IO() : DefaultIO() {
-            override suspend fun provide(): Int = 1
+            override suspend fun provide(): Long = 1
         }
 
         computer.run(io = Part1IO())
 
         class Part2IO() : DefaultIO() {
-            override suspend fun provide(): Int = 5
+            override suspend fun provide(): Long = 5
         }
 
         computer.run(io = Part2IO())

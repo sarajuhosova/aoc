@@ -22,23 +22,23 @@ class Day05: ComputerTest(5) {
     @Test
     fun part1Test() {
         runBlocking {
-            val results = mutableListOf<Int>()
+            val results = mutableListOf<Long>()
 
             class Part1IO() : DefaultIO() {
-                override suspend fun provide(): Int = 1
+                override suspend fun provide(): Long = 1
 
-                override suspend fun write(out: Int) {
+                override suspend fun write(out: Long) {
                     results.add(out)
                 }
             }
 
             computer().run(io = Part1IO())
-            assertThat(results.subList(0, results.size - 1)).allMatch { it == 0 }
+            assertThat(results.subList(0, results.size - 1)).allMatch { it == 0L }
             assertThat(results.last()).isEqualTo(9961446)
         }
     }
 
-    private val COMPARISON_EXAMPLES = listOf(
+    private val COMPARISON_EXAMPLES: List<Triple<String, Long, Long>> = listOf(
         Triple("3,9,8,9,10,9,4,9,99,-1,8", 8, -2352),
         Triple("3,9,7,9,10,9,4,9,99,-1,8", -42357982, 8),
         Triple("3,3,1108,-1,8,3,4,3,99", 8, 975),
@@ -51,10 +51,10 @@ class Day05: ComputerTest(5) {
             runBlocking {
                 val computer = Computer(mem)
 
-                class Part2IO(val input: Int, val expected: Boolean) : DefaultIO() {
-                    override suspend fun provide(): Int = input
+                class Part2IO(val input: Long, val expected: Boolean) : DefaultIO() {
+                    override suspend fun provide(): Long = input
 
-                    override suspend fun write(out: Int) {
+                    override suspend fun write(out: Long) {
                         if (expected) assertThat(out).isEqualTo(1)
                         else assertThat(out).isEqualTo(0)
                     }
@@ -79,11 +79,11 @@ class Day05: ComputerTest(5) {
             runBlocking {
                 val computer = Computer(mem)
 
-                class Part2IO(val input: Int) : DefaultIO() {
-                    override suspend fun provide(): Int = input
+                class Part2IO(val input: Long) : DefaultIO() {
+                    override suspend fun provide(): Long = input
 
-                    override suspend fun write(out: Int) {
-                        if (input == 0) assertThat(out).isEqualTo(0)
+                    override suspend fun write(out: Long) {
+                        if (input == 0L) assertThat(out).isEqualTo(0)
                         else assertThat(out).isEqualTo(1)
                     }
                 }
@@ -106,12 +106,12 @@ class Day05: ComputerTest(5) {
                         + "999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99"
             )
 
-            class Part2IO(val input: Int) : DefaultIO() {
-                override suspend fun provide(): Int = input
+            class Part2IO(val input: Long) : DefaultIO() {
+                override suspend fun provide(): Long = input
 
-                override suspend fun write(out: Int) {
+                override suspend fun write(out: Long) {
                     if (input < 8) assertThat(out).isEqualTo(999)
-                    else if (input == 8) assertThat(out).isEqualTo(1000)
+                    else if (input == 8L) assertThat(out).isEqualTo(1000)
                     else assertThat(out).isEqualTo(1001)
                 }
             }
@@ -128,9 +128,9 @@ class Day05: ComputerTest(5) {
     fun part2Test() {
         runBlocking {
             class Part2IO() : DefaultIO() {
-                override suspend fun provide(): Int = 5
+                override suspend fun provide(): Long = 5
 
-                override suspend fun write(out: Int) {
+                override suspend fun write(out: Long) {
                     assertThat(out).isEqualTo(742621)
                 }
             }

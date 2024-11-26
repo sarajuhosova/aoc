@@ -10,8 +10,8 @@ import library.permutations
 import library.readFirst
 import kotlin.math.max
 
-fun linkAmps(computer: Computer, settings: List<Int>): Int {
-    val channels = Array(settings.size) { Channel<Int>(capacity = 1) }
+fun linkAmps(computer: Computer, settings: List<Long>): Long {
+    val channels = Array(settings.size) { Channel<Long>(capacity = 1) }
     val ios = Array(settings.size) { index -> ChannelIO(
         arrayOf(settings[index]),
         channels[index],
@@ -35,8 +35,8 @@ fun linkAmps(computer: Computer, settings: List<Int>): Int {
     return result
 }
 
-fun findMaxSignal(computer: Computer, settings: List<Int>): Int {
-    var maximum = Integer.MIN_VALUE
+fun findMaxSignal(computer: Computer, settings: List<Long>): Long {
+    var maximum = Long.MIN_VALUE
     for (setting in permutations(settings)) {
         maximum = max(maximum, linkAmps(computer, setting))
     }

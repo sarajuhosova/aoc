@@ -6,9 +6,9 @@ import aoc2019.intcode.expections.UnknownParamModeException
 enum class ParamMode(
     val getLocation: (State, Int) -> Int
 ) {
-    POSITION({ state, offset -> state.read(offset) }),
+    POSITION({ state, offset -> state.read(offset).toInt() }),
     IMMEDIATE({ state, offset -> state.getIP() + offset }),
-    RELATION({ state, offset -> state.getBase() + state.read(offset) });
+    RELATION({ state, offset -> state.getBase() + state.read(offset).toInt() });
 
     companion object {
         private val map = entries.associateBy { it.ordinal }
