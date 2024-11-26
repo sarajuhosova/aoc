@@ -1,12 +1,12 @@
 package aoc2019.intcode.io
 
-open class DefaultIO : IO {
-    override fun read(): Int {
+open class DefaultIO(settings: Array<Int> = emptyArray()) : IO(settings) {
+    override suspend fun provide(): Int {
         print("Please enter the input: ")
         return readln().toInt()
     }
 
-    override fun write(out: Int) {
+    override suspend fun write(out: Int) {
         println(out)
     }
 }

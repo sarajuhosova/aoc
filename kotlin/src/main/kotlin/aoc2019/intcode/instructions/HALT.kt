@@ -5,7 +5,7 @@ import aoc2019.intcode.parameters.Param
 
 object HALT: Instruction0 {
 
-    override fun State.exec(): Boolean {
+    override suspend fun State.exec(): Boolean {
         halt()
         return true
     }

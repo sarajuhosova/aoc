@@ -12,7 +12,7 @@ data class Computer(
     private var last: Memory = memory.copy()
     fun readResult(index: Int = 0): Int = last[index]
 
-    fun run(
+    suspend fun run(
         noun: Int = memory[1],
         verb: Int = memory[2],
         io: IO = DefaultIO()

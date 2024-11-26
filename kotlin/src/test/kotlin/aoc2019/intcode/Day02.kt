@@ -1,5 +1,6 @@
 package aoc2019.intcode
 
+import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
@@ -20,34 +21,40 @@ class Day02: ComputerTest(2) {
     @TestFactory
     fun examplePart1Test() = EXAMPLES.map { (mem, index, result) ->
         DynamicTest.dynamicTest("Input $mem results in $result at position $index") {
-            val computer = Computer(mem)
+            runBlocking {
+                val computer = Computer(mem)
 
-            computer.run()
-            assertThat(computer.readResult(index)).isEqualTo(result)
+                computer.run()
+                assertThat(computer.readResult(index)).isEqualTo(result)
+            }
         }
     }
 
     @Test
     fun part1Test() {
-        computer().run(12, 2)
-        assertThat(computer().readResult()).isEqualTo(6568671)
+        runBlocking {
+            computer().run(12, 2)
+            assertThat(computer().readResult()).isEqualTo(6568671)
+        }
     }
 
     @Test
     fun part2Test() {
-        var expected: Int? = null
-        for (noun in 0..99) {
-            for (verb in 0..99) {
-                computer().run(noun, verb)
-                val result = computer().readResult()
-                if (result == 19690720) {
-                    expected = 100 * noun + verb
-                    break
+        runBlocking {
+            var expected: Int? = null
+            for (noun in 0..99) {
+                for (verb in 0..99) {
+                    computer().run(noun, verb)
+                    val result = computer().readResult()
+                    if (result == 19690720) {
+                        expected = 100 * noun + verb
+                        break
+                    }
                 }
             }
-        }
 
-        assertThat(expected).isEqualTo(3951)
+            assertThat(expected).isEqualTo(3951)
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package aoc2019.intcode
 
 import aoc2019.intcode.io.DefaultIO
+import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
@@ -10,27 +11,31 @@ class Day05: ComputerTest(5) {
 
     @Test
     fun examplePart1Test() {
-        val computer = Computer("1002,4,3,4,33")
+        runBlocking {
+            val computer = Computer("1002,4,3,4,33")
 
-        computer.run()
-        assertThat(computer.readResult(4)).isEqualTo(99)
+            computer.run()
+            assertThat(computer.readResult(4)).isEqualTo(99)
+        }
     }
 
     @Test
     fun part1Test() {
-        val results = mutableListOf<Int>()
+        runBlocking {
+            val results = mutableListOf<Int>()
 
-        class Part1IO() : DefaultIO() {
-            override fun read(): Int = 1
+            class Part1IO() : DefaultIO() {
+                override suspend fun provide(): Int = 1
 
-            override fun write(out: Int) {
-                results.add(out)
+                override suspend fun write(out: Int) {
+                    results.add(out)
+                }
             }
-        }
 
-        computer().run(io = Part1IO())
-        assertThat(results.subList(0, results.size - 1)).allMatch { it == 0 }
-        assertThat(results.last()).isEqualTo(9961446)
+            computer().run(io = Part1IO())
+            assertThat(results.subList(0, results.size - 1)).allMatch { it == 0 }
+            assertThat(results.last()).isEqualTo(9961446)
+        }
     }
 
     private val COMPARISON_EXAMPLES = listOf(
@@ -43,21 +48,23 @@ class Day05: ComputerTest(5) {
     @TestFactory
     fun examplePart2ComparisonTests() = COMPARISON_EXAMPLES.map { (mem, t, f) ->
         DynamicTest.dynamicTest("Input $mem results in true for input $t and false for input $f") {
-            val computer = Computer(mem)
+            runBlocking {
+                val computer = Computer(mem)
 
-            class Part2IO(val input: Int, val expected: Boolean) : DefaultIO() {
-                override fun read(): Int = input
+                class Part2IO(val input: Int, val expected: Boolean) : DefaultIO() {
+                    override suspend fun provide(): Int = input
 
-                override fun write(out: Int) {
-                    if (expected) assertThat(out).isEqualTo(1)
-                    else assertThat(out).isEqualTo(0)
+                    override suspend fun write(out: Int) {
+                        if (expected) assertThat(out).isEqualTo(1)
+                        else assertThat(out).isEqualTo(0)
+                    }
                 }
+
+                computer.run(io = Part2IO(t, true))
+                computer.run(io = Part2IO(f, false))
+
+                assertThat(computer.readResult()).isNotNull()
             }
-
-            computer.run(io = Part2IO(t, true))
-            computer.run(io = Part2IO(f, false))
-
-            assertThat(computer.readResult()).isNotNull()
         }
     }
 
@@ -69,63 +76,69 @@ class Day05: ComputerTest(5) {
     @TestFactory
     fun examplePart2JumpTests() = JUMP_EXAMPLES.map { mem ->
         DynamicTest.dynamicTest("Input $mem results returns zero is input is zero, else 1)") {
-            val computer = Computer(mem)
+            runBlocking {
+                val computer = Computer(mem)
+
+                class Part2IO(val input: Int) : DefaultIO() {
+                    override suspend fun provide(): Int = input
+
+                    override suspend fun write(out: Int) {
+                        if (input == 0) assertThat(out).isEqualTo(0)
+                        else assertThat(out).isEqualTo(1)
+                    }
+                }
+
+                computer.run(io = Part2IO(0))
+                computer.run(io = Part2IO(-2495761))
+                computer.run(io = Part2IO(97645))
+
+                assertThat(computer.readResult()).isNotNull()
+            }
+        }
+    }
+
+    @Test
+    fun examplePart2Test() {
+        runBlocking {
+            val computer = Computer(
+                "3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,"
+                        + "1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,"
+                        + "999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99"
+            )
 
             class Part2IO(val input: Int) : DefaultIO() {
-                override fun read(): Int = input
+                override suspend fun provide(): Int = input
 
-                override fun write(out: Int) {
-                    if (input == 0) assertThat(out).isEqualTo(0)
-                    else assertThat(out).isEqualTo(1)
+                override suspend fun write(out: Int) {
+                    if (input < 8) assertThat(out).isEqualTo(999)
+                    else if (input == 8) assertThat(out).isEqualTo(1000)
+                    else assertThat(out).isEqualTo(1001)
                 }
             }
 
-            computer.run(io = Part2IO(0))
-            computer.run(io = Part2IO(-2495761))
-            computer.run(io = Part2IO(97645))
+            computer.run(io = Part2IO(8))
+            computer.run(io = Part2IO(7))
+            computer.run(io = Part2IO(9))
 
             assertThat(computer.readResult()).isNotNull()
         }
     }
 
     @Test
-    fun examplePart2Test() {
-        val computer = Computer(
-            "3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,"
-                    + "1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,"
-                    + "999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99"
-        )
-
-        class Part2IO(val input: Int) : DefaultIO() {
-            override fun read(): Int = input
-
-            override fun write(out: Int) {
-                if (input < 8) assertThat(out).isEqualTo(999)
-                else if (input == 8) assertThat(out).isEqualTo(1000)
-                else assertThat(out).isEqualTo(1001)
-            }
-        }
-
-        computer.run(io = Part2IO(8))
-        computer.run(io = Part2IO(7))
-        computer.run(io = Part2IO(9))
-
-        assertThat(computer.readResult()).isNotNull()
-    }
-
-    @Test
     fun part2Test() {
-        class Part2IO() : DefaultIO() {
-            override fun read(): Int = 5
+        runBlocking {
+            class Part2IO() : DefaultIO() {
+                override suspend fun provide(): Int = 5
 
-            override fun write(out: Int) {
-                assertThat(out).isEqualTo(742621)
+                override suspend fun write(out: Int) {
+                    assertThat(out).isEqualTo(742621)
+                }
             }
+
+            computer().run(io = Part2IO())
+
+            assertThat(computer().readResult()).isNotNull()
         }
-
-        computer().run(io = Part2IO())
-
-        assertThat(computer().readResult()).isNotNull()
     }
 
 }

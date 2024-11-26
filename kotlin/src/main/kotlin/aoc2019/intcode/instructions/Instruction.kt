@@ -15,14 +15,14 @@ import aoc2019.intcode.parameters.Param
 interface Instruction {
     val arguments: Int
 
-    fun execute(state: State, params: Array<Param>) {
+    suspend fun execute(state: State, params: Array<Param>) {
         // run the instruction
         val jumped = exec(state, params)
         // update the pointer
         if (!jumped) state.movePointer(arguments + 1)
     }
 
-    fun exec(state: State, params: Array<Param>): Boolean
+    suspend fun exec(state: State, params: Array<Param>): Boolean
 
     companion object {
         fun get(opcode: Int): Instruction = when (opcode) {
@@ -43,35 +43,35 @@ interface Instruction {
 interface Instruction0: Instruction {
     override val arguments: Int get() = 0
 
-    override fun exec(state: State, params: Array<Param>): Boolean =
+    override suspend fun exec(state: State, params: Array<Param>): Boolean =
         state.exec()
 
-    fun State.exec(): Boolean
+    suspend fun State.exec(): Boolean
 }
 
 interface Instruction1: Instruction {
     override val arguments: Int get() = 1
 
-    override fun exec(state: State, params: Array<Param>): Boolean =
+    override suspend fun exec(state: State, params: Array<Param>): Boolean =
         state.exec(params[0])
 
-    fun State.exec(arg1: Param): Boolean
+    suspend fun State.exec(arg1: Param): Boolean
 }
 
 interface Instruction2: Instruction {
     override val arguments: Int get() = 2
 
-    override fun exec(state: State, params: Array<Param>): Boolean =
+    override suspend fun exec(state: State, params: Array<Param>): Boolean =
         state.exec(params[0], params[1])
 
-    fun State.exec(arg1: Param, arg2: Param): Boolean
+    suspend fun State.exec(arg1: Param, arg2: Param): Boolean
 }
 
 interface Instruction3: Instruction {
     override val arguments: Int get() = 3
 
-    override fun exec(state: State, params: Array<Param>): Boolean =
+    override suspend fun exec(state: State, params: Array<Param>): Boolean =
         state.exec(params[0], params[1], params[2])
 
-    fun State.exec(arg1: Param, arg2: Param, arg3: Param): Boolean
+    suspend fun State.exec(arg1: Param, arg2: Param, arg3: Param): Boolean
 }

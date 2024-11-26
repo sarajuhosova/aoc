@@ -2,9 +2,9 @@ package aoc2019.intcode
 
 import aoc2019.intcode.expections.ProgramHaltedException
 import aoc2019.intcode.instructions.Instruction
+import aoc2019.intcode.io.IO
 import aoc2019.intcode.parameters.Param
 import aoc2019.intcode.parameters.ParamMode
-import aoc2019.intcode.io.IO
 import library.pow
 
 data class State(
@@ -43,11 +43,11 @@ data class State(
     }
 
     // IO
-    fun input(): Int = io.read()
-    fun output(value: Int) = io.write(value)
+    suspend fun input(): Int = io.read()
+    suspend fun output(value: Int) = io.write(value)
 
     // EXECUTION
-    fun execute() {
+    suspend fun execute() {
         while (true) {
             val data = this.read()
 
@@ -63,6 +63,12 @@ data class State(
 
             // check whether the execution was halted
             if (this.isHalted()) return
+
+            keepAlive(instruction, params, data)
         }
     }
+}
+
+fun keepAlive(vararg bla: Any) {
+
 }
