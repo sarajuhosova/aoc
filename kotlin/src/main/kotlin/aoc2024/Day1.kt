@@ -2,20 +2,24 @@ package aoc2024
 
 import library.Year
 import library.readData
+import kotlin.math.abs
 
-fun part1(data: List<String>): Int {
-    return 0
-}
+fun calculateDifferences(data: List<Pair<Int, Int>>): Int =
+    data.sumOf { abs(it.second - it.first) }
 
-fun part2(data: List<String>): Int {
-    return 0
-}
+fun calculateSimilarity(left: List<Int>, right: List<Int>): Int =
+    left.sumOf { l -> right.count { r -> r == l } * l }
 
 fun main() {
     println("Hello, Advent of Code!")
 
     val data = readData(Year._2024, 1)
+        .map { it.split("   ") }
+        .map { it[0].toInt() to it[1].toInt() }
 
-    println(part1(data))
-    println(part2(data))
+    val left = data.map { it.first }.sorted()
+    val right = data.map { it.second }.sorted()
+
+    println(calculateDifferences(left.zip(right)))
+    println(calculateSimilarity(left, right))
 }
