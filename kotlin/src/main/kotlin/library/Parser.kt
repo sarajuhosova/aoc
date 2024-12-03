@@ -21,6 +21,9 @@ fun <T> List<String>.parseByGroup(mapper: (List<String>) -> T) = parseByGroup(th
 fun parseRegex(regex: String, line: String): List<String> =
     Regex(regex).find(line)!!.destructured.toList()
 
+fun String.parseRegex(regex: Regex): List<String> =
+    regex.find(this)!!.destructured.toList()
+
 fun List<String>.parseRegex(regex: String): List<List<String>> =
     map { line -> parseRegex(regex, line) }
 
