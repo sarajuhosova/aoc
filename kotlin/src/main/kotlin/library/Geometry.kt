@@ -14,6 +14,22 @@ enum class Incline {
 }
 
 data class Coordinate(val x: Int, val y: Int) {
+    fun getNeighbours(): Set<Coordinate> = setOf(
+        this.move(Direction.UP),
+        this.move(Direction.RIGHT),
+        this.move(Direction.DOWN),
+        this.move(Direction.LEFT)
+    )
+
+    fun getDiagonals(): Set<Coordinate> = setOf(
+        this.move(Direction.UP, Direction.RIGHT),
+        this.move(Direction.UP, Direction.LEFT),
+        this.move(Direction.DOWN, Direction.RIGHT),
+        this.move(Direction.DOWN, Direction.LEFT),
+    )
+
+    fun getSurrounding(): Set<Coordinate> =
+        getNeighbours() union getDiagonals()
 
     fun move(direction: Direction): Coordinate = when (direction) {
         Direction.UP -> Coordinate(x, y + 1)
@@ -22,9 +38,22 @@ data class Coordinate(val x: Int, val y: Int) {
         Direction.LEFT -> Coordinate(x - 1, y)
     }
 
-    fun isManhattanBounded(other: List<Coordinate>): Boolean {
-        // TODO: filter out itself
-        return false
+    fun move(vararg directions: Direction): Coordinate {
+        var result = this
+        for (direction in directions) {
+            result = result.move(direction)
+        }
+        return result
+    }
+
+    fun moveSteps(steps: Int, vararg directions: Direction): List<Coordinate> {
+        val result = mutableListOf<Coordinate>()
+        var current = this
+        repeat (steps) {
+            current = current.move(*directions)
+            result.add(current)
+        }
+        return result
     }
 
     fun manhattanDistance(other: Coordinate): Int = abs(x - other.x) + abs(y - other.y)
