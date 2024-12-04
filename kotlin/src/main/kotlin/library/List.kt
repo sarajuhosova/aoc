@@ -2,6 +2,8 @@ package library
 
 class EmptyListException: RuntimeException()
 
+fun <T: Comparable<T>> Iterable<T>.countAll(): Map<T, Int> = this.groupingBy { it }.eachCount()
+
 fun <T> List<T>.tail() = if (isEmpty()) throw EmptyListException() else drop(1)
 fun <T> List<T>.head() = first()
 
