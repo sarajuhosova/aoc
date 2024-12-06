@@ -80,10 +80,10 @@ fun main() {
     val data = readData(Year._2024, 6)
     val (obstacles, start, size) = parse(data)
 
-    println(walk(start, obstacles, size).distinct().size)
+    val visited = walk(start, obstacles, size).distinct()
+    println(visited.size)
 
-    val options = (0..<size.x).flatMap {
-        x -> (0..size.y).map { y -> Coordinate(x, y) }
-    }.filter { it != start && it !in obstacles && loops(start, obstacles + setOf(it), size)  }
+    val options = visited.drop(1)
+        .filter { loops(start, obstacles + setOf(it), size) }
     println(options.size)
 }
