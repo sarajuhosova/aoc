@@ -17,6 +17,14 @@ data class Coordinate(val x: Int, val y: Int) {
     fun inBounds(bounds: Coordinate): Boolean =
         0 <= this.x && this.x < bounds.x && 0 <= this.y && this.y < bounds.y
 
+    fun copy(): Coordinate = Coordinate(x, y)
+
+    operator fun plus(other: Coordinate): Coordinate =
+        Coordinate(x + other.x, y + other.y)
+
+    operator fun minus(other: Coordinate): Coordinate =
+        Coordinate(x - other.x, y - other.y)
+
     fun getNeighbours(): Set<Coordinate> = setOf(
         this.move(Direction.UP),
         this.move(Direction.RIGHT),
