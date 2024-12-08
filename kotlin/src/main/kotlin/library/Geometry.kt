@@ -14,6 +14,9 @@ enum class Incline {
 }
 
 data class Coordinate(val x: Int, val y: Int) {
+    fun inBounds(bounds: Coordinate): Boolean =
+        0 <= this.x && this.x < bounds.x && 0 <= this.y && this.y < bounds.y
+
     fun getNeighbours(): Set<Coordinate> = setOf(
         this.move(Direction.UP),
         this.move(Direction.RIGHT),
