@@ -2,7 +2,6 @@ package aoc2024
 
 import library.Coordinate
 import library.Year
-import library.draw
 import library.readData
 
 fun parseAntennas(data: List<String>): Map<Char, List<Coordinate>> {
@@ -29,23 +28,24 @@ fun findAntinodes(
             val right = coordinates[y]
             val delta = Coordinate(right.x - left.x, right.y - left.y)
 
-            if (repeat) {
-                result.add(left)
-                result.add(right)
+            if (!repeat) {
+                val smaller = left - delta
+                if (smaller.inBounds(bounds)) result.add(smaller)
+                val larger = right + delta
+                if (larger.inBounds(bounds)) result.add(larger)
+                continue
             }
 
-            var smaller = left - delta
-            while (smaller.inBounds(bounds)) {
+            var smaller = left
+            do {
                 result.add(smaller)
-                if (!repeat) break
                 smaller -= delta
-            }
-            var larger = right + delta
-            while (larger.inBounds(bounds)) {
+            } while (smaller.inBounds(bounds))
+            var larger = right
+            do {
                 result.add(larger)
-                if (!repeat) break
                 larger += delta
-            }
+            } while (larger.inBounds(bounds))
         }
     }
 
@@ -57,12 +57,10 @@ fun main() {
     val antennas = parseAntennas(data)
     val bounds = Coordinate(data[0].length, data.size)
 
-    val singleAntinodes = antennas.map { findAntinodes(it.value, bounds) }
-        .reduce { a, b -> a union b }
-    println(singleAntinodes.associateBy({ it }, { '#' }).draw('.'))
-    println(singleAntinodes.size)
+    val antinodes = antennas.map {
+        findAntinodes(it.value, bounds) to findAntinodes(it.value, bounds, true)
+    }.reduce { a, b -> (a.first union b.first) to (a.second union b.second) }
 
-    val allAntinodes = antennas.map { findAntinodes(it.value, bounds, true) }.reduce { a, b -> a union b }
-    println(allAntinodes.associateBy({ it }, { '#' }).draw('.'))
-    println(allAntinodes.size)
+    println(antinodes.first.size)
+    println(antinodes.second.size)
 }
