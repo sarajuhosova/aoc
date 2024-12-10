@@ -14,8 +14,10 @@ enum class Incline {
 }
 
 data class Coordinate(val x: Int, val y: Int) {
-    fun inBounds(bounds: Coordinate): Boolean =
-        0 <= this.x && this.x < bounds.x && 0 <= this.y && this.y < bounds.y
+    fun inBounds(x: Int, y: Int): Boolean =
+        this.x in 0..<x && this.y in 0..<y
+
+    fun inBounds(bounds: Coordinate): Boolean = inBounds(bounds.x, bounds.y)
 
     fun copy(): Coordinate = Coordinate(x, y)
 
