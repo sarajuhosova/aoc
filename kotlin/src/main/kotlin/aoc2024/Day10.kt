@@ -30,25 +30,10 @@ fun Array<Array<Int>>.findTrails(head: Coordinate): Set<List<Coordinate>> {
     return trails.toSet()
 }
 
-fun Array<Array<Int>>.findEnds(head: Coordinate): Set<Coordinate> {
-    if (this.isEmpty()) return emptySet()
-    val bounds = Coordinate(this[0].size, this.size)
-
-    var positions = setOf(head)
-
-    for (i in 1..9) {
-        positions = positions.flatMap { position ->
-            position.getNeighbours()
-                .filter { it.inBounds(bounds) && this.at(it) == i }
-        }.toSet()
-    }
-
-    return positions
-}
-
 fun main() {
     val map = readData(Year._2024, 10).toIntArray()
 
-    val trailEnds = map.getTrailheads().map { map.findEnds(it) }
-    println(trailEnds.sumOf { it.size })
+    val trails = map.getTrailheads().map { map.findTrails(it) }
+    println(trails.sumOf { it.map { trail -> trail.last() }.toSet().size })
+    println(trails.sumOf { it.size })
 }
