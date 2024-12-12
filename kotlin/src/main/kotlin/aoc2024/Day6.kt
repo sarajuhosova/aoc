@@ -1,7 +1,7 @@
 package aoc2024
 
-import library.Coordinate
-import library.Direction
+import library.geometry.Coordinate
+import library.geometry.Direction
 import library.Year
 import library.readData
 

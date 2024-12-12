@@ -1,6 +1,8 @@
 package aoc2021
 
 import library.*
+import library.geometry.Coordinate
+import library.geometry.Line
 
 fun countOverlapsNaive(lines: List<Line>): Int {
     val positions = mutableSetOf<Coordinate>()

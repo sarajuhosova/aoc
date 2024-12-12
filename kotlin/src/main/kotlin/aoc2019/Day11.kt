@@ -4,6 +4,9 @@ import aoc2019.intcode.Computer
 import aoc2019.intcode.io.IO
 import kotlinx.coroutines.runBlocking
 import library.*
+import library.geometry.Coordinate
+import library.geometry.Direction
+import library.geometry.draw
 
 // 0 -> black | left
 // 1 -> white | right

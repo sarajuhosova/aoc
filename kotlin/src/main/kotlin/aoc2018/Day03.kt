@@ -1,6 +1,8 @@
 package aoc2018
 
 import library.*
+import library.geometry.Coordinate
+import library.geometry.Square
 
 data class Claim(val id: Int, val dimensions: Square) {
     val positions = dimensions.generatePositions()

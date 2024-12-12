@@ -1,6 +1,7 @@
 package aoc2024
 
 import library.*
+import library.geometry.*
 
 fun Array<CharArray>.get(coordinate: Coordinate): Char =
     this[coordinate.y][coordinate.x]
