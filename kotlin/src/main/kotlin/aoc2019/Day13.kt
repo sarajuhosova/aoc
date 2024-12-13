@@ -3,7 +3,7 @@ package aoc2019
 import aoc2019.intcode.Computer
 import aoc2019.intcode.io.IO
 import kotlinx.coroutines.runBlocking
-import library.geometry.Coordinate
+import library.geometry.ints.Coordinate
 import library.Year
 import library.readFirst
 import kotlin.random.Random

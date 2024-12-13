@@ -1,4 +1,6 @@
-package library.geometry
+package library.geometry.ints
+
+import library.geometry.Direction
 
 /**
  * Assume that they are all connected to each other.

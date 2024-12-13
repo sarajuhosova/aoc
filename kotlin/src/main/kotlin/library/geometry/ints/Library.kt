@@ -1,4 +1,4 @@
-package library.geometry
+package library.geometry.ints
 
 fun Map<Coordinate, Char>.draw(default: Char = ' '): String {
     val smallestX = this.keys.minOf { it.x }

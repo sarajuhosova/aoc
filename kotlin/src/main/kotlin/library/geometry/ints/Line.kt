@@ -1,4 +1,4 @@
-package library.geometry
+package library.geometry.ints
 
 import kotlin.math.abs
 

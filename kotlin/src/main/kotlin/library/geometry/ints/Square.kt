@@ -1,4 +1,4 @@
-package library.geometry
+package library.geometry.ints
 
 data class Square(
     val corner: Coordinate,

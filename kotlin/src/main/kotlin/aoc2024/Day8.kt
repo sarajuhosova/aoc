@@ -1,6 +1,6 @@
 package aoc2024
 
-import library.geometry.Coordinate
+import library.geometry.ints.Coordinate
 import library.Year
 import library.readData
 

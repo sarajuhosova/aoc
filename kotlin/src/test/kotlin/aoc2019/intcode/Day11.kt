@@ -2,7 +2,7 @@ package aoc2019.intcode
 
 import aoc2019.Robot
 import kotlinx.coroutines.runBlocking
-import library.geometry.draw
+import library.geometry.ints.draw
 import org.assertj.core.api.Assertions.assertThat
 import kotlin.test.Test
 

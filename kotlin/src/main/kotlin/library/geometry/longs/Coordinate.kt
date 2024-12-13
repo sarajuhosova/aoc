@@ -1,9 +1,11 @@
-package library.geometry
+package library.geometry.longs
 
+import library.geometry.Direction
+import library.geometry.Incline
 import kotlin.math.abs
 
-data class Coordinate(val x: Int, val y: Int) {
-    fun inBounds(x: Int, y: Int): Boolean =
+data class Coordinate(val x: Long, val y: Long) {
+    fun inBounds(x: Long, y: Long): Boolean =
         this.x in 0..<x && this.y in 0..<y
 
     fun inBounds(bounds: Coordinate): Boolean = inBounds(bounds.x, bounds.y)
@@ -13,18 +15,12 @@ data class Coordinate(val x: Int, val y: Int) {
     operator fun plus(other: Coordinate): Coordinate =
         Coordinate(x + other.x, y + other.y)
 
+    operator fun plus(scalar: Long): Coordinate = Coordinate(x + scalar, y + scalar)
+
     operator fun minus(other: Coordinate): Coordinate =
         Coordinate(x - other.x, y - other.y)
 
-    fun multiply(m: Int): Coordinate = Coordinate(x * m, y * m)
-
-    fun divide(other: Coordinate): Int? = if (this.divisibleBy(other)) x / other.x else null
-
-    fun divisibleBy(other: Coordinate): Boolean {
-        if (x % other.x != 0) return false
-        val quotient = x / other.x
-        return y - (other.y * quotient) == 0
-    }
+    operator fun times(scalar: Long): Coordinate = Coordinate(x * scalar, y * scalar)
 
     fun getNeighbours(): Set<Coordinate> = setOf(
         this.move(Direction.UP),
@@ -68,7 +64,7 @@ data class Coordinate(val x: Int, val y: Int) {
         return result
     }
 
-    fun manhattanDistance(other: Coordinate): Int = abs(x - other.x) + abs(y - other.y)
+    fun manhattanDistance(other: Coordinate): Long = abs(x - other.x) + abs(y - other.y)
 
     fun incline(other: Coordinate): Incline =
         if (this == other) Incline.NONE
@@ -80,8 +76,7 @@ data class Coordinate(val x: Int, val y: Int) {
                 ) else if (this.y < other.y) Incline.NEGATIVE else Incline.NONE
 
     companion object {
-        val ORIGIN = Coordinate(0, 0)
-
         fun origin(): Coordinate = Coordinate(0, 0)
     }
+
 }
