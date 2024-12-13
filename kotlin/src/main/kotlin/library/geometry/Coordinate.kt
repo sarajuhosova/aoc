@@ -16,6 +16,16 @@ data class Coordinate(val x: Int, val y: Int) {
     operator fun minus(other: Coordinate): Coordinate =
         Coordinate(x - other.x, y - other.y)
 
+    fun multiply(m: Int): Coordinate = Coordinate(x * m, y * m)
+
+    fun divide(other: Coordinate): Int? = if (this.divisibleBy(other)) x / other.x else null
+
+    fun divisibleBy(other: Coordinate): Boolean {
+        if (x % other.x != 0) return false
+        val quotient = x / other.x
+        return y - (other.y * quotient) == 0
+    }
+
     fun getNeighbours(): Set<Coordinate> = setOf(
         this.move(Direction.UP),
         this.move(Direction.RIGHT),
@@ -70,6 +80,8 @@ data class Coordinate(val x: Int, val y: Int) {
                 ) else if (this.y < other.y) Incline.NEGATIVE else Incline.NONE
 
     companion object {
+        val ORIGIN = Coordinate(0, 0)
+
         fun origin(): Coordinate = Coordinate(0, 0)
     }
 }

@@ -24,6 +24,11 @@ fun parseRegex(regex: String, line: String): List<String> =
 fun String.parseRegex(regex: Regex): List<String> =
     regex.find(this)!!.destructured.toList()
 
+fun <T> String.parseRegex(
+    regex: Regex,
+    formatter: (List<String>) -> T
+): T = formatter(this.parseRegex(regex))
+
 fun List<String>.parseRegex(regex: String): List<List<String>> =
     map { line -> parseRegex(regex, line) }
 
