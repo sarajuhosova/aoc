@@ -1,4 +1,4 @@
-package aoc2024
+package aoc2024.day12
 
 import library.*
 import library.geometry.*

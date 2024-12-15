@@ -1,4 +1,4 @@
-package aoc2024
+package aoc2024.day04
 
 import library.geometry.ints.Coordinate
 import library.geometry.Direction

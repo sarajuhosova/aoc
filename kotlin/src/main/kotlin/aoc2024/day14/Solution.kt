@@ -1,4 +1,4 @@
-package aoc2024
+package aoc2024.day14
 
 import library.Year
 import library.geometry.ints.Coordinate

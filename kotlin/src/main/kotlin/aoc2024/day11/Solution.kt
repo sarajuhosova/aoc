@@ -1,4 +1,4 @@
-package aoc2024
+package aoc2024.day11
 
 import library.Year
 import library.readFirst
