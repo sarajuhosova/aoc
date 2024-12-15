@@ -6,7 +6,7 @@ import library.geometry.ints.Coordinate
 import library.geometry.ints.draw
 import library.readData
 
-class State(
+open class State(
     private var robot: Coordinate,
     private val boxes: MutableSet<Coordinate>,
     private val walls: Set<Coordinate>
