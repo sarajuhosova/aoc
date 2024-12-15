@@ -35,11 +35,11 @@ data class Coordinate(val x: Int, val y: Int) {
     fun getSurrounding(): Set<Coordinate> =
         getNeighbours() union getDiagonals()
 
-    fun move(direction: Direction): Coordinate = when (direction) {
-        Direction.UP -> Coordinate(x, y + 1)
-        Direction.RIGHT -> Coordinate(x + 1, y)
-        Direction.DOWN -> Coordinate(x, y - 1)
-        Direction.LEFT -> Coordinate(x - 1, y)
+    fun move(direction: Direction, steps: Int = 1): Coordinate = when (direction) {
+        Direction.UP -> Coordinate(x, y + steps)
+        Direction.RIGHT -> Coordinate(x + steps, y)
+        Direction.DOWN -> Coordinate(x, y - steps)
+        Direction.LEFT -> Coordinate(x - steps, y)
     }
 
     fun move(vararg directions: Direction): Coordinate {
