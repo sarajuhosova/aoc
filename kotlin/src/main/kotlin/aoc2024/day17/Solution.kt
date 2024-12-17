@@ -1,19 +1,17 @@
 package aoc2024.day17
 
-import library.Year
-import library.pow
-import library.readData
+import library.*
 
 typealias Program = List<Byte>
 
 var logger = mutableListOf<String>()
 
-fun Program.run(init: Triple<Int, Int, Int>): List<Byte> {
+fun Program.run(init: Triple<Long, Long, Long>): List<Byte> {
     val out = mutableListOf<Byte>()
     var (a, b, c) = init
 
-    fun getCombo(position: Int): Int = when (this[position]) {
-        in 0..3 -> this[position].toInt()
+    fun getCombo(position: Int): Long = when (this[position]) {
+        in 0..3 -> this[position].toLong()
         4.toByte() -> a
         5.toByte() -> b
         6.toByte() -> c
@@ -36,14 +34,14 @@ fun Program.run(init: Triple<Int, Int, Int>): List<Byte> {
                 logger.add("a = a / (2^${getComboLog(pointer + 1)})    ($a)")
             }
             1.toByte() -> {
-                b = b xor this[pointer + 1].toInt()
+                b = b xor this[pointer + 1].toLong()
                 logger.add("b = b xor ${this[pointer + 1]}    ($b)")
             }
             2.toByte() -> {
                 b = getCombo(pointer + 1) % 8
                 logger.add("b = ${getComboLog(pointer + 1)} % 8    ($b)")
             }
-            3.toByte() -> if (a != 0) {
+            3.toByte() -> if (a != 0L) {
                 pointer = this[pointer + 1].toInt() - 2
                 logger.add("jump     (${pointer + 2})")
             } else logger.add("no jump")
@@ -67,12 +65,42 @@ fun Program.run(init: Triple<Int, Int, Int>): List<Byte> {
         }
         pointer += 2
     }
+
     return out
 }
 
-fun String.parseRegister(): Int = this.split(": ")[1].toInt()
+fun List<Byte>.computeAs(): Set<Long> {
+    if (this.isEmpty()) return setOf(0L)
 
-fun List<String>.parse(): Pair<Triple<Int, Int, Int>, Program> {
+    val target = this.head()
+    val previousAs = this.tail().computeAs()
+
+    val result = mutableSetOf<Long>()
+
+    for (thisA in 0..7) {
+        for (previousA in previousAs) {
+            val a: Long = (previousA shl 3) + thisA
+            // b = a % 8
+            // b = b xor 1
+            val bShift: Int = thisA xor 1
+            // c = a / (2^b)
+            val c = a shr bShift
+            // a = a / (2^3)
+            // b = b xor c
+            var b = bShift.toLong() xor c
+            // b = b xor 6
+            b = b xor 6
+            // >> b % 8
+            if ((b % 8).toByte() == target) result.add(a)
+        }
+    }
+
+    return result
+}
+
+fun String.parseRegister(): Long = this.split(": ")[1].toLong()
+
+fun List<String>.parse(): Pair<Triple<Long, Long, Long>, Program> {
     return Pair(
         Triple(this[0].parseRegister(), this[1].parseRegister(), this[2].parseRegister()),
         this[4].split(": ")[1].split(",").map { it.toByte() }
@@ -86,4 +114,6 @@ fun main() {
 
     java.io.File("src/main/resources/aoc2024/day17/log.txt")
         .writeText(logger.joinToString("\n"))
+
+    println(program.computeAs().minOrNull() ?: "No potential seed found :(")
 }
