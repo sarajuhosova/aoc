@@ -8,21 +8,34 @@ class Towels(private val terminal: Boolean): HashMap<Char, Towels>() {
     private val memory = mutableMapOf<String, Long>()
 
     fun build(design: String, towels: Towels = this): Long {
+        // if suffix is empty, return 1 if we have used a full towel, else 0
         if (design.isEmpty()) return if (towels.terminal) 1 else 0
 
         var solutions = 0L
 
+        // if we are not at the end of a state machine
+        // (i.e. there is a longer string potentially still)
         if (towels.isNotEmpty()) {
+            // consume the next character
             val rest = design.drop(1)
+            // advance to the next state along the edge of that next character
             val next = towels[design[0]]
+            // if there is such a next state, continue building this
+            // else there are no solutions here
             if (next != null) solutions += this.build(rest, next)
         }
 
+        // if we are at a terminal
+        // we can also potentially start a new towel
         if (towels.terminal) {
+            // if we have calculated the rest of this design already
             if (design in memory) {
+                // just return that
                 solutions += memory[design]!!
             } else {
+                // else calculate this design starting from a new towel
                 solutions += this.build(design)
+                // store that calculation
                 memory[design] = solutions
             }
         }
@@ -34,7 +47,8 @@ class Towels(private val terminal: Boolean): HashMap<Char, Towels>() {
         (if (terminal) listOf("") else emptyList()) +
                 this.flatMap { (k, v) -> v.options().map { k + it } }
 
-    override fun toString(): String = options().filter { it.isNotEmpty() }.joinToString(", ")
+    override fun toString(): String = options()
+        .filter { it.isNotEmpty() }.joinToString(", ")
 
 }
 
