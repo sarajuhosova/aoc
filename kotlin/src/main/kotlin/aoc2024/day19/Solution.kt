@@ -2,36 +2,38 @@ package aoc2024.day19
 
 import library.Year
 import library.readData
-import library.tail
 
-class Stripe(val char: Char, val next: Set<Stripe>, val terminal: Boolean) {
+class Towels(private val terminal: Boolean): HashMap<Char, Towels>() {
 
-    private fun options(): Set<String> =
-        next.flatMap { it.options().map { s -> char + s } }.toSet()
+    fun build(design: String, towels: Towels = this): Int {
+        if (design.isEmpty()) return if (towels.terminal) 1 else 0
+        val restarted = if (towels.terminal) this.build(design) else 0
 
-    override fun toString(): String = "{${options().joinToString(", ")}}"
+        var solutions = 0
+        if (towels.isNotEmpty()) {
+            val rest = design.drop(1)
+            val next = towels[design[0]]
+            if (next != null) solutions = this.build(rest, next)
+        }
+
+        return solutions + restarted
+    }
+
+    private fun options(): List<String> =
+        (if (terminal) listOf("") else emptyList()) +
+                this.flatMap { (k, v) -> v.options().map { k + it } }
+
+    override fun toString(): String = options().filter { it.isNotEmpty() }.joinToString(", ")
 
 }
 
-typealias Towels = Set<Stripe>
+fun List<String>.toStripes(terminal: Boolean = false): Towels {
+    if (this.isEmpty()) return Towels(true)
 
-fun Towels.get(char: Char): Stripe? = this.find { it.char == char }
-
-fun Towels.build(design: String, next: Set<Stripe> = this): Int {
-    if (design.isEmpty()) return 1
-    if (next.isEmpty()) return 0
-
-    val first = next.get(design[0]) ?: return 0
-    val rest = design.drop(1)
-    return this.build(rest, first.next) + (if (first.terminal) this.build(rest) else 0)
-}
-
-fun List<String>.toStripes(): Towels {
-    if (this.isEmpty()) return emptySet()
-    val result = mutableSetOf<Stripe>()
-    for ((char, strings) in this.filter { it.isNotEmpty() }.groupBy { it[0] }) {
-        val next = strings.map { it.drop(1) }.toStripes()
-        result.add(Stripe(char, next, strings.any { it.length == 1 }))
+    val result = Towels(terminal)
+    for ((char, strings) in this.groupBy { it[0] }) {
+        val (empty, rest) = strings.map { it.drop(1) }.partition { it.isEmpty() }
+        result[char] = rest.toStripes(empty.isNotEmpty())
     }
     return result
 }
@@ -43,5 +45,5 @@ fun main() {
 
     val counts = designs.map { towels.build(it) }
     println(counts.count { it > 0 })
-    println(counts.sum() / 2)
+    println(counts.sum())
 }
