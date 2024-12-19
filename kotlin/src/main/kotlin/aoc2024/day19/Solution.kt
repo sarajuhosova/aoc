@@ -5,18 +5,29 @@ import library.readData
 
 class Towels(private val terminal: Boolean): HashMap<Char, Towels>() {
 
-    fun build(design: String, towels: Towels = this): Int {
-        if (design.isEmpty()) return if (towels.terminal) 1 else 0
-        val restarted = if (towels.terminal) this.build(design) else 0
+    private val memory = mutableMapOf<String, Long>()
 
-        var solutions = 0
+    fun build(design: String, towels: Towels = this): Long {
+        if (design.isEmpty()) return if (towels.terminal) 1 else 0
+
+        var solutions = 0L
+
         if (towels.isNotEmpty()) {
             val rest = design.drop(1)
             val next = towels[design[0]]
-            if (next != null) solutions = this.build(rest, next)
+            if (next != null) solutions += this.build(rest, next)
         }
 
-        return solutions + restarted
+        if (towels.terminal) {
+            if (design in memory) {
+                solutions += memory[design]!!
+            } else {
+                solutions += this.build(design)
+                memory[design] = solutions
+            }
+        }
+
+        return solutions
     }
 
     private fun options(): List<String> =
@@ -43,7 +54,7 @@ fun main() {
     val towels = data.first().split(", ").toStripes()
     val designs = data.drop(2)
 
-    val counts = designs.map { towels.build(it) }
-    println(counts.count { it > 0 })
+    val counts = designs.map { towels.build(it) }.filter { it > 0 }
+    println(counts.size)
     println(counts.sum())
 }
