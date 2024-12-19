@@ -17,13 +17,13 @@ typealias Towels = Set<Stripe>
 
 fun Towels.get(char: Char): Stripe? = this.find { it.char == char }
 
-fun Towels.build(design: String, next: Set<Stripe> = this): Boolean {
-    if (design.isEmpty()) return true
-    if (next.isEmpty()) return false
+fun Towels.build(design: String, next: Set<Stripe> = this): Int {
+    if (design.isEmpty()) return 1
+    if (next.isEmpty()) return 0
 
-    val first = next.get(design[0]) ?: return false
-    if (first.terminal && this.build(design.drop(1))) return true
-    return this.build(design.drop(1), first.next)
+    val first = next.get(design[0]) ?: return 0
+    val rest = design.drop(1)
+    return this.build(rest, first.next) + (if (first.terminal) this.build(rest) else 0)
 }
 
 fun List<String>.toStripes(): Towels {
@@ -41,5 +41,7 @@ fun main() {
     val towels = data.first().split(", ").toStripes()
     val designs = data.drop(2)
 
-    println(designs.count { towels.build(it) })
+    val counts = designs.map { towels.build(it) }
+    println(counts.count { it > 0 })
+    println(counts.sum() / 2)
 }
