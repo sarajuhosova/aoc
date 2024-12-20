@@ -47,28 +47,30 @@ class Towels(private val terminal: Boolean): HashMap<Char, Towels>() {
         (if (terminal) listOf("") else emptyList()) +
                 this.flatMap { (k, v) -> v.options().map { k + it } }
 
-    override fun toString(): String = options()
-        .filter { it.isNotEmpty() }.joinToString(", ")
+    override fun toString(): String = options().joinToString(", ")
 
 }
 
-fun List<String>.toStripes(terminal: Boolean = false): Towels {
-    if (this.isEmpty()) return Towels(true)
+fun List<String>.toTowels(terminal: Boolean = false): Towels {
+    if (this.isEmpty()) return Towels(terminal)
 
     val result = Towels(terminal)
     for ((char, strings) in this.groupBy { it[0] }) {
         val (empty, rest) = strings.map { it.drop(1) }.partition { it.isEmpty() }
-        result[char] = rest.toStripes(empty.isNotEmpty())
+        result[char] = rest.toTowels(empty.isNotEmpty())
     }
     return result
 }
 
 fun main() {
     val data = readData(Year._2024, 19)
-    val towels = data.first().split(", ").toStripes()
+    val towels = data.first().split(", ").toTowels()
     val designs = data.drop(2)
 
     val counts = designs.map { towels.build(it) }.filter { it > 0 }
     println(counts.size)
     println(counts.sum())
+
+    println(towels.toString().split(", ").sorted().joinToString(", "))
+    println(data[0].split(", ").sorted().joinToString(", "))
 }
