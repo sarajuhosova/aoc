@@ -21,11 +21,11 @@ data class Coordinate(val x: Int, val y: Int) {
     operator fun minus(other: Coordinate): Coordinate =
         Coordinate(x - other.x, y - other.y)
 
-    fun getNeighbours(): Set<Coordinate> =
-        Direction.entries.map { this.move(it) }.toSet()
+    fun getNeighbours(steps: Int = 1): Set<Coordinate> =
+        Direction.entries.map { this.move(it, steps) }.toSet()
 
-    fun getNeighbourMap(): Map<Direction, Coordinate> =
-        Direction.entries.associateWith { this.move(it) }
+    fun getNeighbourMap(steps: Int = 1): Map<Direction, Coordinate> =
+        Direction.entries.associateWith { this.move(it, steps) }
 
     fun getDiagonals(): Set<Coordinate> = setOf(
         this.move(Direction.UP, Direction.RIGHT),
