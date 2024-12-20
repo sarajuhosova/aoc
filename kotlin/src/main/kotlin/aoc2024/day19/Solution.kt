@@ -34,9 +34,10 @@ class Towels(private val terminal: Boolean): HashMap<Char, Towels>() {
                 solutions += memory[design]!!
             } else {
                 // else calculate this design starting from a new towel
-                solutions += this.build(design)
+                val withFullTowels = this.build(design)
+                solutions += withFullTowels
                 // store that calculation
-                memory[design] = solutions
+                memory[design] = withFullTowels
             }
         }
 
@@ -70,7 +71,4 @@ fun main() {
     val counts = designs.map { towels.build(it) }.filter { it > 0 }
     println(counts.size)
     println(counts.sum())
-
-    println(towels.toString().split(", ").sorted().joinToString(", "))
-    println(data[0].split(", ").sorted().joinToString(", "))
 }
