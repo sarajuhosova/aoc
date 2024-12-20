@@ -2,20 +2,18 @@ package aoc2024.day20
 
 import aoc2024.day16.parseMap
 import library.Year
-import library.geometry.Direction
 import library.geometry.ints.Coordinate
 import library.geometry.ints.shortest
 import library.readData
-import java.util.*
 
-fun List<Coordinate>.findCheats(cutoff: Int = 100): Set<Pair<Coordinate, Direction>> {
-    val result = mutableSetOf<Pair<Coordinate, Direction>>()
+fun List<Coordinate>.findCheats(max: Int = 20, cutoff: Int = 100): Int {
+    var result = 0
 
     for (i in this.indices) {
-        val position = this[i]
-        position.getNeighbourMap(2)
-            .filter { (_, n) -> n in this && i + cutoff < this.indexOf(n) }
-            .forEach { (d, _) -> result.add(position to d) }
+        for (j in (i + cutoff)..this.lastIndex) {
+            val distance = this[j].manhattanDistance(this[i])
+            if (distance <= max && j >= i + distance + cutoff) result++
+        }
     }
 
     return result
@@ -26,5 +24,6 @@ fun main() {
 
     val shortest = path.shortest(positions.first)[positions.second]!!
 
-    println(shortest.findCheats().size)
+    println(shortest.findCheats(2))
+    println(shortest.findCheats(20))
 }
