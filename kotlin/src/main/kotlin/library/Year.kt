@@ -10,7 +10,8 @@ enum class Year {
     _2021,
     _2022,
     _2023,
-    _2024;
+    _2024,
+    _2025;
 
     val directory: String
         get() = name
