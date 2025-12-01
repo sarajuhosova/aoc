@@ -6,6 +6,7 @@ mod y2025;
 
 pub mod read;
 pub mod year;
+mod parse;
 
 type Puzzle = fn(String) -> ();
 
