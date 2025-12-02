@@ -1,3 +1,4 @@
+use std::collections::HashSet;
 use crate::Puzzle;
 
 struct Range {
@@ -27,10 +28,8 @@ fn parse(input: String) -> Vec<Range> {
         }).collect::<Vec<Range>>()
 }
 
-fn double(s: &String) -> u64 {
-    let mut doubled = s.to_owned();
-    doubled.push_str(s);
-    doubled.parse().unwrap()
+fn repeat(s: &String, x: usize) -> u64 {
+    s.repeat(x).parse().unwrap()
 }
 
 fn next(s: &String) -> String {
@@ -38,30 +37,30 @@ fn next(s: &String) -> String {
     (value + 1).to_string()
 }
 
-fn get_repeats(range: &Range) -> Vec<u64> {
-    let mut repeats = Vec::new();
+fn get_repeats(range: &Range, n: usize) -> HashSet<u64> {
+    let mut repeats = HashSet::new();
 
     let (start_string, end_string) = range.to_strings();
     let length = start_string.len();
-    let mut current = start_string[..length/2].to_string();
+    let mut current = start_string[..(length / n)].to_string();
 
-    if length % 2 != 0 {
+    if length % n != 0 {
         if length == end_string.len() {
             // there will be no repeats
             return repeats
         }
 
         current = "1".to_string();
-        current.push_str("0".repeat(length / 2).as_str());
+        current.push_str("0".repeat(length / n).as_str());
     }
 
 
     loop {
-        let candidate = double(&current);
+        let candidate = repeat(&current, n);
         if candidate > range.end { break }
 
         if candidate > range.start {
-            repeats.push(candidate);
+            repeats.insert(candidate);
         }
         current = next(&current);
     }
@@ -70,18 +69,25 @@ fn get_repeats(range: &Range) -> Vec<u64> {
 }
 
 fn part1(ranges: &Vec<Range>) -> u64 {
-    let mut sum: u64 = 0;
+    let mut repeats: HashSet<u64> = HashSet::new();
 
     for range in ranges {
-        let repeats: Vec<u64> = get_repeats(range);
-        sum += repeats.iter().sum::<u64>();
+        repeats.extend(get_repeats(range, 2).into_iter());
     }
 
-    sum
+    repeats.iter().sum()
 }
 
 fn part2(ranges: &Vec<Range>) -> u64 {
-    0
+    let mut repeats: HashSet<u64> = HashSet::new();
+
+    for range in ranges {
+        for i in 2..=range.end.to_string().len() {
+            repeats.extend(get_repeats(range, i).into_iter());
+        }
+    }
+
+    repeats.iter().sum()
 }
 
 fn run(input: String) {
