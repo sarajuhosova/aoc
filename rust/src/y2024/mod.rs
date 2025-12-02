@@ -10,7 +10,7 @@ impl Calendar for Y24 {
 
     fn days(&self) -> HashMap<u8, Puzzle> {
         HashMap::from([
-            (1, day01::get_runner()),
+            (1, day01::PUZZLE),
         ])
     }
 }

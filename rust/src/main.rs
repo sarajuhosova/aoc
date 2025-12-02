@@ -8,7 +8,7 @@ pub mod read;
 pub mod year;
 mod parse;
 
-type Puzzle = fn(String) -> ();
+pub struct Puzzle { runner: fn(String) -> () }
 
 pub trait Calendar {
     fn year(&self) -> Year;
@@ -17,9 +17,9 @@ pub trait Calendar {
 
     fn run(&self, day: u8, filename: &str) {
         match self.days().get(&day) {
-            Some(f) => {
+            Some(Puzzle { runner }) => {
                 let input: String = read::read(self.year(), day, filename);
-                f(input)
+                runner(input)
             },
             None => println!("Day {} of year {:?} not implemented", day, self.year()),
         }

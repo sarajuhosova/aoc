@@ -14,9 +14,9 @@ impl Calendar for Y25 {
 
     fn days(&self) -> HashMap<u8, Puzzle> {
         HashMap::from([
-            (1, day01::get_runner()),
-            (2, day02::get_runner()),
-            (3, day03::get_runner()),
+            (1, day01::PUZZLE),
+            (2, day02::PUZZLE),
+            (3, day03::PUZZLE),
         ])
     }
 }

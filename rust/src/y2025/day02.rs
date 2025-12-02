@@ -95,4 +95,4 @@ fn run(input: String) {
     println!("Part 1: {}\nPart 2: {}", part1(&ranges), part2(&ranges));
 }
 
-pub fn get_runner() -> Puzzle { run }
+pub const PUZZLE: Puzzle = Puzzle { runner: run };

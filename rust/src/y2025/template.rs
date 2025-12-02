@@ -4,4 +4,4 @@ fn run(input: String) {
     println!("{}", input)
 }
 
-pub fn get_runner() -> Puzzle { run }
+pub const PUZZLE: Puzzle = Puzzle { runner: run };

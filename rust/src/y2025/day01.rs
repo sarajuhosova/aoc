@@ -63,4 +63,4 @@ fn run(input: String) {
     println!("Part 1: {}\nPart 2: {}", part1(&rotations), part2(&rotations));
 }
 
-pub fn get_runner() -> Puzzle { run }
+pub const PUZZLE: Puzzle = Puzzle { runner: run };
