@@ -28,7 +28,7 @@ pub trait Calendar {
 
 fn main() {
     let year: Year = Year::_2025;
-    let day: u8 = 1;
+    let day: u8 = 2;
     let filename: &str = "in";
 
     match year {
