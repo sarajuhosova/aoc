@@ -27,9 +27,17 @@ pub trait Calendar {
 }
 
 fn main() {
-    let year: Year = Year::_2025;
-    let day: u8 = 2;
-    let filename: &str = "in";
+    let args: Vec<String> = std::env::args().collect();
+
+    if args.len() < 4 {
+        panic!("Please provide the year, day, and filename as arguments");
+    }
+
+    let mut iter = args.iter().skip(1);
+
+    let filename: &str = iter.next().unwrap();
+    let year: Year = Year::from_string(iter.next().unwrap());
+    let day: u8 = iter.next().unwrap().parse().unwrap();
 
     match year {
         Year::_2024 => { y2024::Y24.run(day, filename) },

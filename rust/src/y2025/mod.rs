@@ -1,9 +1,10 @@
-use std::collections::HashMap;
-use crate::{Calendar, Puzzle};
 use crate::year::Year;
+use crate::{Calendar, Puzzle};
+use std::collections::HashMap;
 
 mod day01;
 mod day02;
+mod day03;
 
 mod template;
 
@@ -15,6 +16,7 @@ impl Calendar for Y25 {
         HashMap::from([
             (1, day01::get_runner()),
             (2, day02::get_runner()),
+            (3, day03::get_runner()),
         ])
     }
 }

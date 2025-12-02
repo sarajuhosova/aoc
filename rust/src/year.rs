@@ -21,4 +21,12 @@ impl Year {
         format!("{}/day{:02}", year, day)
     }
 
+    pub fn from_string(input: &str) -> Year {
+        match input {
+            "2024" => Year::_2024,
+            "2025" => Year::_2025,
+            _ => panic!("Unsupported year: {}", input)
+        }
+    }
+
 }

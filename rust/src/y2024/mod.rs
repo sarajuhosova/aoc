@@ -1,6 +1,6 @@
-use std::collections::HashMap;
-use crate::{Calendar, Puzzle};
 use crate::year::Year;
+use crate::{Calendar, Puzzle};
+use std::collections::HashMap;
 
 mod day01;
 
