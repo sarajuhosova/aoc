@@ -5,6 +5,7 @@ use std::collections::HashMap;
 mod day01;
 mod day02;
 mod day03;
+mod day04;
 
 mod template;
 
@@ -17,6 +18,7 @@ impl Calendar for Y25 {
             (1, day01::PUZZLE),
             (2, day02::PUZZLE),
             (3, day03::PUZZLE),
+            (4, day04::PUZZLE),
         ])
     }
 }
