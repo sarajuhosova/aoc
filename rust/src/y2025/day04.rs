@@ -1,4 +1,3 @@
-use std::collections::HashSet;
 use crate::Puzzle;
 
 #[derive(PartialEq, Eq, Hash, Clone, Copy)]
@@ -25,6 +24,16 @@ impl Coordinate {
         ]
     }
 
+}
+
+fn parse_map(input: String) -> Vec<Vec<bool>> {
+    let mut coords = Vec::new();
+
+    for line in input.lines() {
+        coords.push(line.chars().map(|c| c == '@').collect());
+    }
+
+    coords
 }
 
 fn parse(input: String) -> Vec<Coordinate> {
@@ -56,10 +65,40 @@ fn part1(rolls: &Vec<Coordinate>) -> u32 {
     count
 }
 
+fn inaccessible(rolls: &Vec<Coordinate>) -> Vec<Coordinate> {
+    let mut inaccessible = Vec::new();
+
+    for roll in rolls {
+        let surrounding = roll.surrounding().iter()
+            .filter(|c| rolls.contains(c))
+            .count();
+        if surrounding >= 4 { inaccessible.push(*roll); }
+    }
+
+    inaccessible
+}
+
+fn part2(rolls: &Vec<Coordinate>) -> usize {
+    let mut leftover = rolls.clone();
+    let mut changed = 0;
+
+    loop {
+        let inaccessible = inaccessible(&leftover);
+        let change = leftover.len() - inaccessible.len();
+
+        if change > 0 {
+            changed += change;
+            leftover = inaccessible;
+        } else { break; }
+    }
+
+    changed
+}
+
 fn run(input: String) {
     let rolls = parse(input);
 
-    println!("Part 1: {}", part1(&rolls));
+    println!("Part 1: {}\n Part 2: {}", part1(&rolls), part2(&rolls));
 }
 
 pub const PUZZLE: Puzzle = Puzzle { runner: run };
